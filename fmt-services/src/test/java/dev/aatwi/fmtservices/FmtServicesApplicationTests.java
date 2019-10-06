@@ -1,4 +1,4 @@
-package dev.aatwi.feedback.management.tool.services;
+package dev.aatwi.fmtservices;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,12 +7,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FeedbackServicesApplicationTests
+public class FmtServicesApplicationTests
 {
 
-    @Test
-    public void contextLoads()
-    {
-    }
+	@Test
+	public void contextLoads()
+	{
+	}
 
 }

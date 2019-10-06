@@ -1,15 +1,15 @@
-package dev.aatwi.feedback.management.tool.services;
+package dev.aatwi.fmtservices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FeedbackServicesApplication
+public class FmtServicesApplication
 {
 
     public static void main(String[] args)
     {
-        SpringApplication.run(FeedbackServicesApplication.class, args);
+        SpringApplication.run(FmtServicesApplication.class, args);
     }
 
 }
