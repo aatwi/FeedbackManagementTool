@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HashValueGenerator} from "../helpers/hash-value-generator";
+import {HashValueGenerator} from "../../helpers/hash-value-generator";
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   invalidInput(): boolean {
-
     if (this.loginButtonClicked) {
       if (this.emailIsNotValid(this.userEmail)) {
         this.errorMessage = '*Please enter a valid email!';
