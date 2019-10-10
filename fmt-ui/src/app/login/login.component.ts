@@ -24,11 +24,9 @@ export class LoginComponent implements OnInit {
   }
 
   invalidInput(): boolean {
+
     if (this.loginButtonClicked) {
-      const regExp = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$');
-      const validEmail = regExp.test(this.userEmail);
-      if (!validEmail || this.userEmail == undefined || this.userEmail.length == 0) {
-        this.errorMessage = '* Please enter a valid email address';
+      if (this.emailIsNotValid(this.userEmail)) {
         return true;
       }
       if (this.userPassword == undefined || this.userPassword.length == 0) {
@@ -37,5 +35,10 @@ export class LoginComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  emailIsNotValid(userEmail: string): boolean {
+    const emailRegEx = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9]+$');
+    return userEmail == undefined || userEmail.length == 0 || !emailRegEx.test(this.userEmail);
   }
 }
