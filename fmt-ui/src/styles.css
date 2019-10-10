@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+div.card {
+  margin-top: 10px
+}
+
+.section {
+  padding-top: 10px;
+}
+
+div.customer-input {
+  background: lightgray;
+  display: block;
+  width: 350px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.group-input {
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-title {
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  font-size: small;
+  padding-bottom: 4px;
+}
+
+.input-text-box {
+  height: 20px;
+  width: 320px;
+  font-size: x-small;
+}
