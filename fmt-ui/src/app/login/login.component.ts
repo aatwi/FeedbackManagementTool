@@ -27,10 +27,11 @@ export class LoginComponent implements OnInit {
 
     if (this.loginButtonClicked) {
       if (this.emailIsNotValid(this.userEmail)) {
+        this.errorMessage = '*Please enter a valid email!';
         return true;
       }
-      if (this.userPassword == undefined || this.userPassword.length == 0) {
-        this.errorMessage = '* Please enter your password';
+      if (this.passwordIsNotValid(this.userPassword)) {
+        this.errorMessage = '*Please enter your password!';
         return true;
       }
     }
@@ -40,5 +41,9 @@ export class LoginComponent implements OnInit {
   emailIsNotValid(userEmail: string): boolean {
     const emailRegEx = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9]+$');
     return userEmail == undefined || userEmail.length == 0 || !emailRegEx.test(this.userEmail);
+  }
+
+  passwordIsNotValid(password: string): boolean {
+    return password == undefined || password.length == 0;
   }
 }

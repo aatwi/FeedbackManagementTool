@@ -5,6 +5,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule} from "@angular/forms";
 
 describe('LoginComponent', () => {
+  let emailErrorMessage = '*Please enter a valid email!';
+  let passwordErrorMessage = '*Please enter your password!';
   let component: LoginComponent;
   let loginComponent: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -19,6 +21,8 @@ describe('LoginComponent', () => {
     })
       .compileComponents().then(() => {
         loginComponent = new LoginComponent();
+      loginComponent.userPassword = 'password';
+      loginComponent.userEmail = 'user@fmt.com';
         loginComponent.loginButtonClicked = true;
       }
     );
@@ -32,37 +36,57 @@ describe('LoginComponent', () => {
 
   it('should notify the user when then email empty', () => {
     loginComponent.userEmail = '';
-    expect(loginComponent.invalidInput()).toEqual(true);
+    assertInvalidEmail();
   });
 
   it('should notify the user when the email is undefined', () => {
     loginComponent.userEmail = undefined;
-    expect(loginComponent.invalidInput()).toEqual(true);
+    assertInvalidEmail();
   });
 
   it('should notify the user when they enter an email without the @', () => {
     loginComponent.userEmail = 'user.com';
-    expect(loginComponent.invalidInput()).toEqual(true);
+    assertInvalidEmail();
   });
 
   it('should notify the user when they enter an email without the @ and .domain ', () => {
     loginComponent.userEmail = 'user';
-    expect(loginComponent.invalidInput()).toEqual(true);
+    assertInvalidEmail();
   });
 
   it('should notify the user when they enter an email without the domain ', () => {
     loginComponent.userEmail = 'user@fmt.';
-    expect(loginComponent.invalidInput()).toEqual(true);
+    assertInvalidEmail();
   });
 
   it('should notify the user when they enter an email without the .domain ', () => {
     loginComponent.userEmail = 'user@fmt';
-    expect(loginComponent.invalidInput()).toEqual(true);
+    assertInvalidEmail();
   });
 
   it('should not raise and exception when email has the right format', () => {
     loginComponent.userEmail = 'user@fmt.com';
     expect(loginComponent.invalidInput()).toEqual(false);
   });
+
+  it('should raise an error if the password is undefined', () => {
+    loginComponent.userPassword = undefined;
+    assertInvalidPassword();
+  });
+
+  it('should raise an error if the password is left empty', () => {
+    loginComponent.userPassword = '';
+    assertInvalidPassword();
+  });
+
+  function assertInvalidPassword() {
+    expect(loginComponent.invalidInput()).toEqual(true);
+    expect(loginComponent.errorMessage).toEqual(passwordErrorMessage);
+  }
+
+  function assertInvalidEmail() {
+    expect(loginComponent.invalidInput()).toEqual(true);
+    expect(loginComponent.errorMessage).toEqual(emailErrorMessage);
+  }
 
 });
