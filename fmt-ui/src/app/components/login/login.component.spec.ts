@@ -3,6 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule} from "@angular/forms";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('LoginComponent', () => {
   let emailErrorMessage = '*Please enter a valid email!';
@@ -15,12 +16,14 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        HttpClientTestingModule
       ],
       declarations: [LoginComponent]
     })
       .compileComponents().then(() => {
-        loginComponent = new LoginComponent();
+
+      loginComponent = new LoginComponent(null);
       loginComponent.userPassword = 'password';
       loginComponent.userEmail = 'user@fmt.com';
         loginComponent.loginButtonClicked = true;

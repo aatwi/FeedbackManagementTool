@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HashValueGenerator} from "../../helpers/hash-value-generator";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,13 @@ export class LoginComponent implements OnInit {
   userPassword: string;
   errorMessage: string;
   loginButtonClicked: boolean;
+  loggedInUser;
 
-  constructor() {
+  loginService: LoginService;
+
+
+  constructor(private serviceLogin: LoginService) {
+    this.loginService = serviceLogin;
   }
 
   ngOnInit() {
@@ -19,8 +25,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginButtonClicked = true;
-    var password = HashValueGenerator.getHashFor(this.userPassword)
-    // login(this.userEmail, password);
+    this.loginService.login(this.userEmail, HashValueGenerator.getHashFor(this.userPassword))
+      .subscribe(data => {
+          this.loggedInUser = data
+        },
+        error1 => console.error(error1),
+        () => console.log('User LoggedIn'));
   }
 
   invalidInput(): boolean {
