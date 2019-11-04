@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {HashValueGenerator} from "../../helpers/hash-value-generator";
 import {LoginService} from "../../services/login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+  router: Router;
   userEmail: string;
   userPassword: string;
   errorMessage: string;
@@ -16,7 +18,9 @@ export class LoginComponent implements OnInit {
   loginService: LoginService;
 
 
-  constructor(private serviceLogin: LoginService) {
+  constructor(private serviceLogin: LoginService,
+              private routerParam: Router) {
+    this.router = routerParam;
     this.loginService = serviceLogin;
   }
 
@@ -30,7 +34,7 @@ export class LoginComponent implements OnInit {
           this.loggedInUser = data
         },
         error1 => console.error(error1),
-        () => console.log('User LoggedIn'));
+        () => this.router.navigate(['loginSuccess']));
   }
 
   invalidInput(): boolean {
