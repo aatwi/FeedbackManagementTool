@@ -4,6 +4,7 @@ import {LoginService} from './login.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 
 describe('LoginService', () => {
+  let restApiUrl = 'http://localhost:4200/api/';
   beforeEach(() => TestBed.configureTestingModule({
     providers: [LoginService],
     imports: [HttpClientTestingModule]
@@ -19,7 +20,7 @@ describe('LoginService', () => {
             expect(data.email).toBe('USER_ONE@FMT.COM');
           });
 
-        const request = httpMock.expectOne('http://localhost:8080/api/v1/login/USER_ONE@FMT.COM/0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e');
+        const request = httpMock.expectOne(restApiUrl + 'login/USER_ONE@FMT.COM/0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e');
         expect(request.request.method).toEqual('GET');
 
         request.flush({'name': 'USER ONE', 'email': 'USER_ONE@FMT.COM'});
@@ -36,7 +37,7 @@ describe('LoginService', () => {
             expect(data.email).toBeUndefined();
           });
 
-        const request = httpMock.expectOne('http://localhost:8080/api/v1/login/USER_ONE@FMT.COM/WrongPassword');
+        const request = httpMock.expectOne(restApiUrl + 'login/USER_ONE@FMT.COM/WrongPassword');
         expect(request.request.method).toEqual('GET');
 
         request.flush({});
