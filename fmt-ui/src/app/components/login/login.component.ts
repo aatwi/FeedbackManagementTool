@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   userPassword: string;
   errorMessage: string;
   loginButtonClicked: boolean;
+  failedPassword: boolean;
   loggedInUser;
 
   loginService: LoginService;
@@ -33,12 +34,19 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
           this.loggedInUser = data
         },
-        error1 => console.error(error1),
+        error1 => {
+          this.failedPassword = true;
+          this.invalidInput();
+        },
         () => this.router.navigate(['loginSuccess']));
   }
 
   invalidInput(): boolean {
     if (this.loginButtonClicked) {
+      if (this.failedPassword) {
+        this.errorMessage = '*Wrong Username or Password!';
+        return true;
+      }
       if (this.emailIsNotValid(this.userEmail)) {
         this.errorMessage = '*Please enter a valid email!';
         return true;

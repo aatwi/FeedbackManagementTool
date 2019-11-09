@@ -8,6 +8,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 describe('LoginComponent', () => {
   let emailErrorMessage = '*Please enter a valid email!';
   let passwordErrorMessage = '*Please enter your password!';
+  let wrongUserNamePassword = '*Wrong Username or Password!';
   let component: LoginComponent;
   let loginComponent: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -23,7 +24,7 @@ describe('LoginComponent', () => {
     })
       .compileComponents().then(() => {
 
-      loginComponent = new LoginComponent(null);
+      loginComponent = new LoginComponent(null, null);
       loginComponent.userPassword = 'password';
       loginComponent.userEmail = 'user@fmt.com';
         loginComponent.loginButtonClicked = true;
@@ -81,6 +82,16 @@ describe('LoginComponent', () => {
     loginComponent.userPassword = '';
     assertInvalidPassword();
   });
+
+  it('should raise an error if the user provided a wrong username or password', () => {
+    loginComponent.failedPassword = true;
+    assertWrongUserOrPassword();
+  });
+
+  function assertWrongUserOrPassword() {
+    expect(loginComponent.invalidInput()).toEqual(true);
+    expect(loginComponent.errorMessage).toEqual(wrongUserNamePassword);
+  }
 
   function assertInvalidPassword() {
     expect(loginComponent.invalidInput()).toEqual(true);
