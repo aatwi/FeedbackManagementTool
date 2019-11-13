@@ -4,6 +4,7 @@ import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +26,17 @@ public class UserController
 
     @PostMapping(value = "/create/")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody User user)
+    public ResponseEntity<User> createUser(@RequestBody User user)
     {
-        userRepository.save(user);
+        try
+        {
+            User createdUser = userRepository.save(user);
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        }
+        catch (Exception exception)
+        {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
