@@ -1,6 +1,10 @@
 package dev.aatwi.fmtservices.controller;
 
+import dev.aatwi.fmtservices.dto.UserDTO;
+import dev.aatwi.fmtservices.dto.UserDTOBuilder;
+import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
+import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,12 +44,22 @@ public class UserControllerTest
     @Test
     public void itShouldAddANewUserToTheUserRepository()
     {
-        User createdUser = new User("email@email.com", "User Name", "testPassword");
+        User createdUser = UserBuilder.newUserBuilder()
+            .withEmail("email@email.com")
+            .withName("User Name")
+            .withPassword("testPassword")
+            .build();
         when(userRepository.save(any(User.class))).thenReturn(createdUser);
 
-        ResponseEntity responseEntity = userController.createUser(new User("email@email.com", "User Name", "testPassword"));
+        UserDTO userDTO = UserDTOBuilder.newUserDTOBuilder()
+            .withEmail("email@email.com")
+            .withName("User Name")
+            .withPassword("testPassword")
+            .build();
+
+        ResponseEntity responseEntity = userController.createUser(userDTO);
         assertEquals(201, responseEntity.getStatusCodeValue());
-        assertEquals(createdUser, responseEntity.getBody());
+        assertEquals(UserMapper.toUserDTO(createdUser), responseEntity.getBody());
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.aatwi.fmtservices.controller;
 
+import dev.aatwi.fmtservices.dto.UserDTO;
+import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static dev.aatwi.fmtservices.mapper.UserMapper.toUserDTO;
 
 @RestController
 @RequestMapping("api/users")
@@ -26,12 +30,12 @@ public class UserController
 
     @PostMapping(value = "/create/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> createUser(@RequestBody User user)
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO)
     {
         try
         {
-            User createdUser = userRepository.save(user);
-            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+            User createdUser = userRepository.save(UserMapper.toUser(userDTO));
+            return new ResponseEntity<>(toUserDTO(createdUser), HttpStatus.CREATED);
         }
         catch (Exception exception)
         {
