@@ -70,7 +70,8 @@ public class User
     }
 
 
-    @Override public String toString()
+    @Override
+    public String toString()
     {
         return "User{" +
             "email='" + email + '\'' +
@@ -80,7 +81,8 @@ public class User
     }
 
 
-    @Override public boolean equals(Object o)
+    @Override
+    public boolean equals(Object o)
     {
         if (this == o)
             return true;
@@ -93,7 +95,8 @@ public class User
     }
 
 
-    @Override public int hashCode()
+    @Override
+    public int hashCode()
     {
         return Objects.hash(email, name, password);
     }

@@ -1,6 +1,6 @@
 package dev.aatwi.fmtservices.dto;
 
-public class UserDTOBuilder
+public final class UserDTOBuilder
 {
     private String email;
     private String name;
