@@ -1,15 +1,16 @@
 package dev.aatwi.fmtservices.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(
+    name = "user",
+    uniqueConstraints = @UniqueConstraint(name = "uc_email", columnNames = {"EMAIL"})
+)
 public class User
 {
     @Id
@@ -17,7 +18,12 @@ public class User
     @Column(name = "EMAIL")
     private String email;
 
+    @Column(nullable = false)
+    @NotNull(message = "User name can not be null!")
     private String name;
+
+    @Column(nullable = false)
+    @NotNull(message = "User password can not be null!")
     private String password;
 
 
