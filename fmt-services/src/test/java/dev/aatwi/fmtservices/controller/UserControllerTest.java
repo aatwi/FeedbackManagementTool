@@ -6,6 +6,7 @@ import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,7 +43,8 @@ public class UserControllerTest
 
 
     @Test
-    public void itShouldAddANewUserToTheUserRepository()
+    public void
+    it_should_add_a_newUser_to_the_repository()
     {
         User createdUser = UserBuilder.newUserBuilder()
             .withEmail("email@email.com")
@@ -60,6 +62,28 @@ public class UserControllerTest
         ResponseEntity responseEntity = userController.createUser(userDTO);
         assertEquals(201, responseEntity.getStatusCodeValue());
         assertEquals(UserMapper.toUserDTO(createdUser), responseEntity.getBody());
+    }
+
+
+    @Test
+    public void
+    it_should_return_a_list_of_all_users_in_the_repository()
+    {
+        User userOne = UserBuilder.newUserBuilder()
+            .withEmail("email1@email.com")
+            .withName("User One")
+            .withPassword("UserOnePassword")
+            .build();
+
+        User userTwo = UserBuilder.newUserBuilder()
+            .withEmail("email1@email.com")
+            .withName("User One")
+            .withPassword("UserOnePassword")
+            .build();
+
+        when(userRepository.findAll()).thenReturn(Lists.newArrayList(userOne, userTwo));
+
+        assertEquals(Lists.newArrayList(UserMapper.toUserDTO(userOne), UserMapper.toUserDTO(userTwo)), userController.getAllUsers());
     }
 
 }
