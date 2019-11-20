@@ -3,7 +3,7 @@ package dev.aatwi.fmtservices.controller;
 import dev.aatwi.fmtservices.dto.UserDTO;
 import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.repository.UserRepository;
+import dev.aatwi.fmtservices.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import static dev.aatwi.fmtservices.mapper.UserMapper.toUserDTO;
 public class UserController
 {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
 
     @GetMapping(value = "/")
@@ -35,7 +35,7 @@ public class UserController
     {
         try
         {
-            User createdUser = userRepository.save(UserMapper.toUser(userDTO));
+            User createdUser = userService.saveUser(UserMapper.toUser(userDTO));
             return new ResponseEntity<>(toUserDTO(createdUser), HttpStatus.CREATED);
         }
         catch (Exception exception)
@@ -48,7 +48,7 @@ public class UserController
     @GetMapping(value = "/all/")
     public List<UserDTO> getAllUsers()
     {
-        List<User> allUsers = userRepository.findAll();
+        List<User> allUsers = userService.getAllUsers();
         return allUsers.stream().map(UserMapper::toUserDTO).collect(Collectors.toList());
     }
 }

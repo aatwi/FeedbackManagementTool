@@ -1,89 +1,88 @@
 package dev.aatwi.fmtservices.controller;
 
-import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.dto.UserDTOBuilder;
-import dev.aatwi.fmtservices.mapper.UserMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.aatwi.fmtservices.FmtServicesApplication;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
-import org.assertj.core.util.Lists;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FmtServicesApplication.class)
+@AutoConfigureMockMvc
+@AutoConfigureTestDatabase
 public class UserControllerTest
 {
-    @InjectMocks
-    UserController userController;
-
-    @Mock
-    UserRepository userRepository;
-
-    private MockHttpServletRequest request;
-
-
-    @BeforeEach
-    void setUp()
-    {
-        request = new MockHttpServletRequest();
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-    }
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private MockMvc mockMvc;
 
 
     @Test
     public void
-    it_should_add_a_newUser_to_the_repository()
+    it_should_add_a_newUser_to_the_repository() throws Exception
     {
         User createdUser = UserBuilder.newUserBuilder()
             .withEmail("email@email.com")
             .withName("User Name")
             .withPassword("testPassword")
             .build();
-        when(userRepository.save(any(User.class))).thenReturn(createdUser);
 
-        UserDTO userDTO = UserDTOBuilder.newUserDTOBuilder()
-            .withEmail("email@email.com")
-            .withName("User Name")
-            .withPassword("testPassword")
-            .build();
+        userRepository.save(createdUser);
+        userRepository.flush();
 
-        ResponseEntity responseEntity = userController.createUser(userDTO);
-        assertEquals(201, responseEntity.getStatusCodeValue());
-        assertEquals(UserMapper.toUserDTO(createdUser), responseEntity.getBody());
+        ObjectMapper objectMapper = new ObjectMapper();
+        String request = "?" + "email=email@email.com" + "&" + "name=User Name" + "&" + "password=testPassword";
+        mockMvc.perform(
+            post("/api/users/create/" + request)
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(createdUser)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.email", is(createdUser.getEmail())))
+            .andExpect(jsonPath("$.name", is(createdUser.getName())))
+            .andExpect(jsonPath("$.password", is(createdUser.getPassword())));
     }
 
 
     @Test
     public void
-    it_should_return_a_list_of_all_users_in_the_repository()
+    it_should_return_a_list_of_all_users_in_the_repository() throws Exception
     {
-        User userOne = UserBuilder.newUserBuilder()
-            .withEmail("email1@email.com")
-            .withName("User One")
-            .withPassword("UserOnePassword")
+        User bob = UserBuilder.newUserBuilder()
+            .withEmail("bob@email.com")
+            .withName("Bob")
+            .withPassword("BobPassword")
             .build();
 
-        User userTwo = UserBuilder.newUserBuilder()
-            .withEmail("email1@email.com")
-            .withName("User One")
-            .withPassword("UserOnePassword")
+        User john = UserBuilder.newUserBuilder()
+            .withEmail("john@email.com")
+            .withName("John")
+            .withPassword("JohnPassword")
             .build();
 
-        when(userRepository.findAll()).thenReturn(Lists.newArrayList(userOne, userTwo));
+        userRepository.saveAndFlush(bob);
+        userRepository.saveAndFlush(john);
 
-        assertEquals(Lists.newArrayList(UserMapper.toUserDTO(userOne), UserMapper.toUserDTO(userTwo)), userController.getAllUsers());
+        mockMvc.perform(get("/api/users/all/")
+            .contentType(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(2)))
+            .andExpect(jsonPath("$[0].email", is(bob.getEmail())))
+            .andExpect(jsonPath("$[1].email", is(john.getEmail())));
     }
 
 }
