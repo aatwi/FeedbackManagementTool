@@ -4,7 +4,6 @@ import dev.aatwi.fmtservices.FmtServicesApplication;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,19 +26,13 @@ public class LoginServiceImplTest
     public void
     it_should_return_the_logged_in_user_in_case_of_successful_login()
     {
-        User userOne = UserBuilder.newUserBuilder()
-            .withEmail("email1@email.com")
-            .withName("User One")
-            .withPassword("UserOnePassword")
-            .build();
-
         User userTwo = UserBuilder.newUserBuilder()
             .withEmail("email2@email.com")
             .withName("User Two")
             .withPassword("UserTwoPassword")
             .build();
 
-        when(userRepository.findAll()).thenReturn(Lists.newArrayList(userOne, userTwo));
+        when(userRepository.findUserByEmailAndPassword("email2@email.com", "UserTwoPassword")).thenReturn(userTwo);
 
         User loggedInUser = loginService.login("email2@email.com", "UserTwoPassword");
 
@@ -57,13 +50,7 @@ public class LoginServiceImplTest
             .withPassword("UserOnePassword")
             .build();
 
-        User userTwo = UserBuilder.newUserBuilder()
-            .withEmail("email2@email.com")
-            .withName("User Two")
-            .withPassword("UserTwoPassword")
-            .build();
-
-        when(userRepository.findAll()).thenReturn(Lists.newArrayList(userOne));
+        when(userRepository.findUserByEmailAndPassword("email2@email.com", "UserTwoPassword")).thenReturn(null);
 
         User loggedInUser = loginService.login("email2@email.com", "UserTwoPassword");
 

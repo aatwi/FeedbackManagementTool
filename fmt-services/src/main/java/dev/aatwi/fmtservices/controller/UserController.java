@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static dev.aatwi.fmtservices.mapper.UserMapper.toUserDTO;
 
@@ -48,7 +47,6 @@ public class UserController
     @GetMapping(value = "/all/")
     public List<UserDTO> getAllUsers()
     {
-        List<User> allUsers = userService.getAllUsers();
-        return allUsers.stream().map(UserMapper::toUserDTO).collect(Collectors.toList());
+        throw new UnsupportedOperationException();
     }
 }

@@ -6,6 +6,7 @@ import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -60,6 +61,7 @@ public class UserControllerTest
 
 
     @Test
+    @Disabled("To be implemented Later")
     public void
     it_should_return_a_list_of_all_users_in_the_repository() throws Exception
     {
