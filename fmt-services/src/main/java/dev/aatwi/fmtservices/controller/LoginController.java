@@ -1,6 +1,9 @@
 package dev.aatwi.fmtservices.controller;
 
+import dev.aatwi.fmtservices.dto.UserDTO;
+import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
+import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,17 +29,17 @@ public class LoginController
 
 
     @GetMapping("/{email}/{password}")
-    public ResponseEntity<User> login(@PathVariable("email") String email, @PathVariable("password") String password)
+    public ResponseEntity<UserDTO> login(@PathVariable("email") String email, @PathVariable("password") String password)
     {
-        final ResponseEntity<User> emptyResponse = new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         User loggedInUser = loginService.login(email, password);
         if (loggedInUser.isNull())
         {
-            return emptyResponse;
+            return new ResponseEntity<>(UserMapper.toUserDTO(UserBuilder.newNullUser()), HttpStatus.NOT_FOUND);
+
         }
         else
         {
-            return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
+            return new ResponseEntity<>(UserMapper.toUserDTO(loggedInUser), HttpStatus.OK);
         }
     }
 }
