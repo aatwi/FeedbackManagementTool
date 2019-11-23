@@ -19,6 +19,12 @@ public final class UserBuilder
     }
 
 
+    public static User newNullUser()
+    {
+        return newUserBuilder().build();
+    }
+
+
     public UserBuilder withEmail(String email)
     {
         this.email = email;
