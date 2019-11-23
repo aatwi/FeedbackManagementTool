@@ -5,6 +5,7 @@ import dev.aatwi.fmtservices.FmtServicesApplication;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -85,4 +86,11 @@ public class UserControllerTest
             .andExpect(jsonPath("$[1].email", is(john.getEmail())));
     }
 
+
+    @AfterEach
+    public void
+    resetDB()
+    {
+        userRepository.deleteAll();
+    }
 }

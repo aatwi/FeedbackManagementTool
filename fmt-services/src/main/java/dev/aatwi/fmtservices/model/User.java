@@ -1,5 +1,6 @@
 package dev.aatwi.fmtservices.model;
 
+import com.google.common.base.Strings;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -105,5 +106,11 @@ public class User
     public int hashCode()
     {
         return Objects.hash(email, name, password);
+    }
+
+
+    public boolean isNull()
+    {
+        return Strings.isNullOrEmpty(email);
     }
 }
