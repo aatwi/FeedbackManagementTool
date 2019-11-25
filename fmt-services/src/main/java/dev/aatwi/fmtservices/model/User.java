@@ -7,9 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "USER")
 @Table(
-    name = "user",
+    name = "USER",
     uniqueConstraints = @UniqueConstraint(name = "uc_email", columnNames = {"EMAIL"})
 )
 public class User

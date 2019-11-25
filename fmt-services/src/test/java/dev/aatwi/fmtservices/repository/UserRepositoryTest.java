@@ -44,6 +44,16 @@ public class UserRepositoryTest
 
     @Test
     public void
+    it_should_return_the_corresponding_user_when_searching_by_email_and_password_regardless_of_case()
+    {
+        assertEquals(
+            USER_A,
+            userRepository.findUserByEmailAndPassword("USERA@email.com", "UserAPassword"));
+    }
+
+
+    @Test
+    public void
     it_should_return_null_if_user_is_not_in_the_repository()
     {
         assertNull(userRepository.findUserByEmailAndPassword("UserC@email.com", "UserCPassword"));
