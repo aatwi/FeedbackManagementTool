@@ -19,10 +19,4 @@ public class LoginServiceImpl implements LoginService
         User foundUser = userRepository.findUserByEmailAndPassword(email, password);
         return foundUser != null ? foundUser : UserBuilder.newNullUser();
     }
-
-
-    private boolean authenticateUser(User user, String email, String password)
-    {
-        return user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password);
-    }
 }
