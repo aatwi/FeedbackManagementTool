@@ -1,7 +1,6 @@
 package dev.aatwi.fmtservices.controller;
 
 import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static dev.aatwi.fmtservices.mapper.UserMapper.toUserDTO;
+import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserDTOtoUser;
+import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserToUserDTO;
 
 @RestController
 @RequestMapping("api/users")
@@ -34,8 +34,8 @@ public class UserController
     {
         try
         {
-            User createdUser = userService.saveUser(UserMapper.toUser(userDTO));
-            return new ResponseEntity<>(toUserDTO(createdUser), HttpStatus.CREATED);
+            User createdUser = userService.saveUser(convertUserDTOtoUser(userDTO));
+            return new ResponseEntity<>(convertUserToUserDTO(createdUser), HttpStatus.CREATED);
         }
         catch (Exception exception)
         {

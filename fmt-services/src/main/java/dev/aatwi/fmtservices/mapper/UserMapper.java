@@ -7,13 +7,13 @@ import static dev.aatwi.fmtservices.dto.UserDTOBuilder.newUserDTOBuilder;
 
 public class UserMapper
 {
-    public static User toUser(UserDTO userDTO)
+    public static User convertUserDTOtoUser(UserDTO userDTO)
     {
         return new User(userDTO.getEmail(), userDTO.getName(), userDTO.getPassword());
     }
 
 
-    public static UserDTO toUserDTO(User user)
+    public static UserDTO convertUserToUserDTO(User user)
     {
         return newUserDTOBuilder()
             .withEmail(user.getEmail())

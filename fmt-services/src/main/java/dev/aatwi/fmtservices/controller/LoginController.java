@@ -1,7 +1,6 @@
 package dev.aatwi.fmtservices.controller;
 
 import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.mapper.UserMapper;
 import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.services.LoginService;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserToUserDTO;
 
 @RestController
 @RequestMapping("api/login")
@@ -34,12 +35,12 @@ public class LoginController
         User loggedInUser = loginService.login(email, password);
         if (loggedInUser.isNull())
         {
-            return new ResponseEntity<>(UserMapper.toUserDTO(UserBuilder.newNullUser()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(convertUserToUserDTO(UserBuilder.newNullUser()), HttpStatus.NOT_FOUND);
 
         }
         else
         {
-            return new ResponseEntity<>(UserMapper.toUserDTO(loggedInUser), HttpStatus.OK);
+            return new ResponseEntity<>(convertUserToUserDTO(loggedInUser), HttpStatus.OK);
         }
     }
 }

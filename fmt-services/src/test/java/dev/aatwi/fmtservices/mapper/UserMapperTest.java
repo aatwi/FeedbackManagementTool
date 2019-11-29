@@ -3,6 +3,8 @@ package dev.aatwi.fmtservices.mapper;
 import org.junit.jupiter.api.Test;
 
 import static dev.aatwi.fmtservices.dto.UserDTOBuilder.newUserDTOBuilder;
+import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserDTOtoUser;
+import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserToUserDTO;
 import static dev.aatwi.fmtservices.model.UserBuilder.newUserBuilder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +22,7 @@ class UserMapperTest
                 .withPassword("Pass")
                 .build(),
 
-            UserMapper.toUser(newUserDTOBuilder()
+            convertUserDTOtoUser(newUserDTOBuilder()
                 .withEmail("email")
                 .withName("name")
                 .withPassword("Pass")
@@ -34,7 +36,7 @@ class UserMapperTest
     it_should_convert_a_User_object_to_a_UserDTO_object()
     {
         assertEquals(
-            UserMapper.toUserDTO(
+            convertUserToUserDTO(
                 newUserBuilder()
                     .withEmail("email")
                     .withName("name")
