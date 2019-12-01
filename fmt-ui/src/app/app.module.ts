@@ -9,13 +9,15 @@ import {HomeComponent} from './components/home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {LoginSuccessComponent} from './components/login-status/login-success.component';
+import {CreateUserComponent} from "./components/create-user/create-user.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoginSuccessComponent
+    LoginSuccessComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,

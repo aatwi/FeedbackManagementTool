@@ -1,0 +1,27 @@
+<div class="card customer-input">
+  <div class="col-md-6 section">
+    <div class='group-input'>
+      <div class='input-title'>Email:</div>
+      <input class='input-text-box' required type='email' email="true"
+             [(ngModel)]='userEmail'/>
+    </div>
+    <div class='group-input'>
+      <div class='input-title'>Full Name</div>
+      <input class='input-text-box' required type='email' email="true"
+             [(ngModel)]='userName'/>
+    </div>
+    <div class="group-input">
+      <div class='input-title'>Password:</div>
+      <input class='input-text-box' required type='password'
+             [(ngModel)]='password'/>
+    </div>
+    <div class="group-input">
+      <div class='input-title'>Reenter Password:</div>
+      <input class='input-text-box' required type='password'
+             [(ngModel)]='passwordReEntered'/>
+    </div>
+    <div class="group-input">
+      <button mat-raised-button color="primary" (click)="createUser()">Login</button>
+    </div>
+  </div>
+</div>
