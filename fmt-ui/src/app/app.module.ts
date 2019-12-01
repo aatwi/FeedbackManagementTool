@@ -15,9 +15,9 @@ import {CreateUserComponent} from "./components/create-user/create-user.componen
   declarations: [
     AppComponent,
     LoginComponent,
+    CreateUserComponent,
     HomeComponent,
-    LoginSuccessComponent,
-    CreateUserComponent
+    LoginSuccessComponent
   ],
   imports: [
     BrowserModule,

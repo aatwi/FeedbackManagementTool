@@ -23,7 +23,6 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent]
     })
       .compileComponents().then(() => {
-
       loginComponent = new LoginComponent(null, null);
       loginComponent.userPassword = 'password';
       loginComponent.userEmail = 'user@fmt.com';
