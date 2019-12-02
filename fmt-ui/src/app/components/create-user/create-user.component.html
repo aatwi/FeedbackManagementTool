@@ -1,6 +1,6 @@
 <div class="card customer-input">
   <div class="col-md-6 section">
-    <div *ngIf="invalidInput()" class="error-message">
+    <div *ngIf="inputIsInvalid()" class="error-message">
       {{ errorMessage }}
     </div>
     <div class='group-input'>

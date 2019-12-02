@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {InputValidator} from "../../helpers/input-validator";
 
 @Component({
   selector: 'app-create-user',
@@ -22,17 +23,17 @@ export class CreateUserComponent implements OnInit {
     this.createUserButtonClicked = true;
   }
 
-  invalidInput(): boolean {
+  inputIsInvalid(): boolean {
     if (this.createUserButtonClicked) {
-      if (this.emailIsNotValid(this.userEmail)) {
+      if (!InputValidator.isEmailValid(this.userEmail)) {
         this.errorMessage = '*Please enter a valid email!';
         return true;
       }
-      if (this.userNameIsNotValid(this.userName)) {
+      if (!InputValidator.isValidString(this.userName)) {
         this.errorMessage = '*Please enter a valid name!';
         return true;
       }
-      if (this.passwordIsNotValid(this.password)) {
+      if (!InputValidator.isValidString(this.password)) {
         this.errorMessage = '*Please enter a valid password!';
         return true;
       }
@@ -42,19 +43,6 @@ export class CreateUserComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  emailIsNotValid(userEmail: string): boolean {
-    const emailRegEx = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9]+$');
-    return userEmail == undefined || userEmail.length == 0 || !emailRegEx.test(this.userEmail);
-  }
-
-  userNameIsNotValid(name: string) {
-    return name == undefined || name.length == 0;
-  }
-
-  private passwordIsNotValid(password: string) {
-    return password == undefined || password.length == 0;
   }
 
   private passwordDontMatch(password1: string, password2: string) {

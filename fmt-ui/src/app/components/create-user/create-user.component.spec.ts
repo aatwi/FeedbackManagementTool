@@ -29,32 +29,32 @@ describe('CreateUserComponent', () => {
 
   it('should notify the user if email is empty', () => {
     userComponent.userEmail = "";
-    expect(userComponent.invalidInput()).toEqual(true);
+    expect(userComponent.inputIsInvalid()).toEqual(true);
     expect(userComponent.errorMessage).toEqual(emailErrorMessage);
   });
 
   it('should notify the user if email was in a wrong format', () => {
     userComponent.userEmail = "user@fmt.";
-    expect(userComponent.invalidInput()).toEqual(true);
+    expect(userComponent.inputIsInvalid()).toEqual(true);
     expect(userComponent.errorMessage).toEqual(emailErrorMessage);
   });
 
   it('should notify the user if name is empty', () => {
     userComponent.userName = "";
-    expect(userComponent.invalidInput()).toEqual(true);
+    expect(userComponent.inputIsInvalid()).toEqual(true);
     expect(userComponent.errorMessage).toEqual(nameErrorMessage);
   });
 
   it('should notify the user if password is empty', () => {
     userComponent.password = "";
-    expect(userComponent.invalidInput()).toEqual(true);
+    expect(userComponent.inputIsInvalid()).toEqual(true);
     expect(userComponent.errorMessage).toEqual(passwordErrorMessage);
   });
 
   it('should notify the user if passwords do not match', () => {
     userComponent.password = "abc";
     userComponent.passwordReEntered = "abc2";
-    expect(userComponent.invalidInput()).toEqual(true);
+    expect(userComponent.inputIsInvalid()).toEqual(true);
     expect(userComponent.errorMessage).toEqual(passwordDontMatchErrorMessage);
   });
 });

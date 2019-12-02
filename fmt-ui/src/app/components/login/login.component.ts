@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HashValueGenerator} from "../../helpers/hash-value-generator";
 import {LoginService} from "../../services/login.service";
 import {Router} from "@angular/router";
+import {InputValidator} from "../../helpers/input-validator";
 
 @Component({
   selector: 'app-login',
@@ -36,35 +37,26 @@ export class LoginComponent implements OnInit {
         },
         error1 => {
           this.failedPassword = true;
-          this.invalidInput();
+          this.inputIsInvalid();
         },
         () => this.router.navigate(['loginSuccess']));
   }
 
-  invalidInput(): boolean {
+  inputIsInvalid(): boolean {
     if (this.loginButtonClicked) {
       if (this.failedPassword) {
         this.errorMessage = '*Wrong Username or Password!';
         return true;
       }
-      if (this.emailIsNotValid(this.userEmail)) {
+      if (!InputValidator.isEmailValid(this.userEmail)) {
         this.errorMessage = '*Please enter a valid email!';
         return true;
       }
-      if (this.passwordIsNotValid(this.userPassword)) {
+      if (!InputValidator.isValidString(this.userPassword)) {
         this.errorMessage = '*Please enter your password!';
         return true;
       }
     }
     return false;
-  }
-
-  emailIsNotValid(userEmail: string): boolean {
-    const emailRegEx = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9]+$');
-    return userEmail == undefined || userEmail.length == 0 || !emailRegEx.test(this.userEmail);
-  }
-
-  passwordIsNotValid(password: string): boolean {
-    return password == undefined || password.length == 0;
   }
 }

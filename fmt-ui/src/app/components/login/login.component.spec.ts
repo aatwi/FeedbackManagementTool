@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 
 import {LoginComponent} from './login.component';
 import {RouterTestingModule} from "@angular/router/testing";
@@ -9,9 +9,7 @@ describe('LoginComponent', () => {
   let emailErrorMessage = '*Please enter a valid email!';
   let passwordErrorMessage = '*Please enter your password!';
   let wrongUserNamePassword = '*Wrong Username or Password!';
-  let component: LoginComponent;
   let loginComponent: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,12 +28,6 @@ describe('LoginComponent', () => {
       }
     );
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should notify the user when then email empty', () => {
     loginComponent.userEmail = '';
@@ -69,7 +61,7 @@ describe('LoginComponent', () => {
 
   it('should not raise and exception when email has the right format', () => {
     loginComponent.userEmail = 'user@fmt.com';
-    expect(loginComponent.invalidInput()).toEqual(false);
+    expect(loginComponent.inputIsInvalid()).toEqual(false);
   });
 
   it('should raise an error if the password is undefined', () => {
@@ -88,17 +80,17 @@ describe('LoginComponent', () => {
   });
 
   function assertWrongUserOrPassword() {
-    expect(loginComponent.invalidInput()).toEqual(true);
+    expect(loginComponent.inputIsInvalid()).toEqual(true);
     expect(loginComponent.errorMessage).toEqual(wrongUserNamePassword);
   }
 
   function assertInvalidPassword() {
-    expect(loginComponent.invalidInput()).toEqual(true);
+    expect(loginComponent.inputIsInvalid()).toEqual(true);
     expect(loginComponent.errorMessage).toEqual(passwordErrorMessage);
   }
 
   function assertInvalidEmail() {
-    expect(loginComponent.invalidInput()).toEqual(true);
+    expect(loginComponent.inputIsInvalid()).toEqual(true);
     expect(loginComponent.errorMessage).toEqual(emailErrorMessage);
   }
 
