@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {LoginSuccessComponent} from './components/login-status/login-success.component';
 import {CreateUserComponent} from "./components/create-user/create-user.component";
+import {CreateUserSuccessComponent} from './components/create-user-success/create-user-success.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CreateUserComponent} from "./components/create-user/create-user.componen
     LoginComponent,
     CreateUserComponent,
     HomeComponent,
-    LoginSuccessComponent
+    LoginSuccessComponent,
+    CreateUserSuccessComponent
   ],
   imports: [
     BrowserModule,

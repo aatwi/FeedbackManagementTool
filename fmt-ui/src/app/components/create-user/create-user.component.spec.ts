@@ -18,7 +18,7 @@ describe('CreateUserComponent', () => {
       declarations: [CreateUserComponent]
     })
       .compileComponents().then(() => {
-      userComponent = new CreateUserComponent();
+      userComponent = new CreateUserComponent(null, null);
       userComponent.userEmail = "TestUser@email.com";
       userComponent.userName = "Test User";
       userComponent.password = "TestUserPassword";

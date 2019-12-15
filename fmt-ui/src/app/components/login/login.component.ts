@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         },
         error1 => {
           this.failedPassword = true;
+          console.log(error1);
           this.inputIsInvalid();
         },
         () => this.router.navigate(['loginSuccess']));
