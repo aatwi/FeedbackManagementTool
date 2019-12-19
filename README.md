@@ -1,5 +1,9 @@
 # Feedback Management Tool
 
+![Feedback Meeting](./images/FeedbackMeeting.png)
+
+[_Image Source_](https://pixabay.com/vectors/teachers-meeting-books-reading-23820/)
+
 The **360 Degree Feedback** is one of the practices mentioned in [Management 3.0](https://management30.com/). 
 Agile teams tend to adopt this practice to share feedback amongst its members. 
 In this practice, each member, even the boss, participates by giving and receiving
@@ -24,3 +28,5 @@ You can find the features implemented in this application documented on [this](.
 1. [360 Degree Dinner](https://management30.com/practice/360-degree-dinner/)
 1. [Philippe Bourgau](https://philippe.bourgau.net/)
 1. [Feedback On 360 Feedback Session](https://philippe.bourgau.net/feedback-on-360-degrees-feedback-session/)
+1. [PixaBay](https://pixabay.com/)
+
