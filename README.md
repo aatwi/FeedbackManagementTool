@@ -22,7 +22,7 @@ to adopt this method!
 # How the meeting works
 
 ## Before the meeting  
-Before holding the meeting, the team manager and members have some tasks to 
+Before running the meeting, the team manager and members have some tasks to 
 perform. 
 1. The manager sets a date for the '360 Feedback Session'. 
 1. Team members (manager included) privately fill a feedback form.
@@ -32,7 +32,14 @@ that might raise issues between the team members.
 1. In case anyone wrote offensive words, the manager should request clarification 
 and update the text.
 
-## During the meeting 
+## During the meeting
+The meeting is composed of rounds, at each round the team does the following: 
+1. A team member is selected to receive feedback.
+1. By turn, each of the colleagues shares their opinion. 
+1. Meanwhile, the receiver writes down notes (in case of any).
+1. When the round is over, the receiver takes some time to comment on the 
+received feedback.
+
 
 ## After the meeting 
 
