@@ -20,6 +20,9 @@ Based on that, we decided to build this application to make it easier for teams
 to adopt this method!
 
 # How the meeting works
+Running this meeting might take many forms. Our team divided the tasks of this 
+process into three sections, 'Before the Meeting,' 'During the Meeting,' and 
+'After the Meeting.' 
 
 ## Before the meeting  
 Before running the meeting, the team manager and members have some tasks to 
@@ -40,8 +43,11 @@ The meeting is composed of rounds, at each round the team does the following:
 1. When the round is over, the receiver takes some time to comment on the 
 received feedback.
 
-
 ## After the meeting 
+
+Following the meeting, the manager consolidates the feedback for each member.
+1. For each member, the manager collects the given feedback and writes it into a single file 
+1. When done, the manager sends each file to the corresponding member 
 
 # Features 
 
