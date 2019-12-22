@@ -9,12 +9,9 @@ import {AppModule} from "../../app.module";
 import {RouterTestingModule} from "@angular/router/testing";
 import {User} from "../../domain/user";
 import {Observable, of} from "rxjs";
+import {InputValidator} from "../../helpers/input-validator";
 
 describe('CreateUserComponent', () => {
-  let emailErrorMessage = '*Please enter a valid email!';
-  let nameErrorMessage = '*Please enter a valid name!';
-  let passwordErrorMessage = '*Please enter a valid password!';
-  let passwordDontMatchErrorMessage = '*Passwords do not match!';
   let userComponent: CreateUserComponent;
   let dataSrv: DataTransferService;
 
@@ -45,48 +42,31 @@ describe('CreateUserComponent', () => {
 
       userComponent.dataService = dataSrv;
       userComponent.createUserService = createUserSrv;
-
-      userComponent.userEmail = "TestUser@email.com";
-      userComponent.userName = "Test User";
-      userComponent.password = "TestUserPassword";
-      userComponent.passwordReEntered = "TestUserPassword";
-      userComponent.createUserButtonClicked = true;
     });
   }));
 
-  it('should the value of the LoggedInUser in dataService when a new user is created', () => {
+  it('should call DataTransferService.setLoggedInUser on user creation', () => {
     userComponent.createUser();
     expect(dataSrv.setLoggedInUser).toHaveBeenCalled();
   });
 
-  it('should notify the user if email is empty', () => {
-    userComponent.userEmail = "";
-    expect(userComponent.inputIsInvalid()).toEqual(true);
-    expect(userComponent.errorMessage).toEqual(emailErrorMessage);
+  it('should call InputValidator.validateUserCreationInput on data validation', () => {
+    spyOn(InputValidator, 'validateUserCreationInput');
+
+    userComponent.createUserButtonClicked = true;
+    userComponent.inputIsInvalid();
+
+    expect(InputValidator.validateUserCreationInput).toHaveBeenCalled();
   });
 
-  it('should notify the user if email was in a wrong format', () => {
-    userComponent.userEmail = "user@fmt.";
-    expect(userComponent.inputIsInvalid()).toEqual(true);
-    expect(userComponent.errorMessage).toEqual(emailErrorMessage);
+  it('inputIsInvalid should return false when all the data is invalid', () => {
+    userComponent.userEmail = "TestUser@email.com";
+    userComponent.userName = "Test User";
+    userComponent.password = "TestUserPassword";
+    userComponent.passwordReEntered = "TestUserPassword";
+    userComponent.createUserButtonClicked = true;
+
+    expect(userComponent.inputIsInvalid()).toBe(false);
   });
 
-  it('should notify the user if name is empty', () => {
-    userComponent.userName = "";
-    expect(userComponent.inputIsInvalid()).toEqual(true);
-    expect(userComponent.errorMessage).toEqual(nameErrorMessage);
-  });
-
-  it('should notify the user if password is empty', () => {
-    userComponent.password = "";
-    expect(userComponent.inputIsInvalid()).toEqual(true);
-    expect(userComponent.errorMessage).toEqual(passwordErrorMessage);
-  });
-
-  it('should notify the user if passwords do not match', () => {
-    userComponent.password = "abc";
-    userComponent.passwordReEntered = "abc2";
-    expect(userComponent.inputIsInvalid()).toEqual(true);
-    expect(userComponent.errorMessage).toEqual(passwordDontMatchErrorMessage);
-  });
 });

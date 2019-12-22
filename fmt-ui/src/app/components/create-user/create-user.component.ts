@@ -34,11 +34,12 @@ export class CreateUserComponent implements OnInit {
   createUser() {
     this.createUserButtonClicked = true;
     let newUser = new User(this.userName, this.userEmail, this.password);
-    this.createUserService.createUser(newUser).subscribe(createdUser => {
+    this.createUserService.createUser(newUser).subscribe(
+      createdUser => {
         this.createdUser = createdUser;
       },
-      error1 => {
-        console.log(error1);
+      error => {
+        console.log(error);
       }, () => {
         this.dataSrv.setLoggedInUser(this.createdUser);
         this.router.navigate(['createUserSuccess'])
@@ -47,27 +48,13 @@ export class CreateUserComponent implements OnInit {
 
   inputIsInvalid(): boolean {
     if (this.createUserButtonClicked) {
-      if (!InputValidator.isEmailValid(this.userEmail)) {
-        this.errorMessage = '*Please enter a valid email!';
-        return true;
-      }
-      if (!InputValidator.isValidString(this.userName)) {
-        this.errorMessage = '*Please enter a valid name!';
-        return true;
-      }
-      if (!InputValidator.isValidString(this.password)) {
-        this.errorMessage = '*Please enter a valid password!';
-        return true;
-      }
-      if (CreateUserComponent.passwordDontMatch(this.password, this.passwordReEntered)) {
-        this.errorMessage = '*Passwords do not match!';
+      let errorMsg: string;
+      errorMsg = InputValidator.validateUserCreationInput(this.userEmail, this.userName, this.password, this.passwordReEntered);
+      if (errorMsg) {
+        this.errorMessage = errorMsg;
         return true;
       }
     }
     return false;
-  }
-
-  private static passwordDontMatch(password1: string, password2: string) {
-    return password1 != password2;
   }
 }
