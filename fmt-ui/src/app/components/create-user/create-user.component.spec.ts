@@ -2,6 +2,13 @@ import {async, TestBed} from '@angular/core/testing';
 
 import {CreateUserComponent} from './create-user.component';
 import {FormsModule} from "@angular/forms";
+import {DataTransferService} from "../../services/data-transfer.service";
+import {CreateUserService} from "../../services/create-user.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AppModule} from "../../app.module";
+import {RouterTestingModule} from "@angular/router/testing";
+import {User} from "../../domain/user";
+import {Observable, of} from "rxjs";
 
 describe('CreateUserComponent', () => {
   let emailErrorMessage = '*Please enter a valid email!';
@@ -9,16 +16,36 @@ describe('CreateUserComponent', () => {
   let passwordErrorMessage = '*Please enter a valid password!';
   let passwordDontMatchErrorMessage = '*Passwords do not match!';
   let userComponent: CreateUserComponent;
+  let dataSrv: DataTransferService;
 
   beforeEach(async(() => {
+    let userObservable: Observable<User> = new Observable(() => {
+      new User("Test User", "TestUser@email.com", "TestUserPassword")
+    });
+    const createUserSrv = jasmine.createSpyObj('CreateUserService', ['createUser']);
+    createUserSrv.createUser.and.returnValue(of(userObservable));
+
     TestBed.configureTestingModule({
       imports: [
+        AppModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
         FormsModule
       ],
-      declarations: [CreateUserComponent]
+      providers: [
+        {provide: CreateUserService, useValue: createUserSrv},
+        DataTransferService],
+      declarations: []
     })
       .compileComponents().then(() => {
-      userComponent = new CreateUserComponent(null, null);
+      userComponent = TestBed.createComponent(CreateUserComponent).componentInstance;
+
+      dataSrv = TestBed.get(DataTransferService);
+      spyOn(dataSrv, 'setLoggedInUser');
+
+      userComponent.dataService = dataSrv;
+      userComponent.createUserService = createUserSrv;
+
       userComponent.userEmail = "TestUser@email.com";
       userComponent.userName = "Test User";
       userComponent.password = "TestUserPassword";
@@ -26,6 +53,11 @@ describe('CreateUserComponent', () => {
       userComponent.createUserButtonClicked = true;
     });
   }));
+
+  it('should the value of the LoggedInUser in dataService when a new user is created', () => {
+    userComponent.createUser();
+    expect(dataSrv.setLoggedInUser).toHaveBeenCalled();
+  });
 
   it('should notify the user if email is empty', () => {
     userComponent.userEmail = "";

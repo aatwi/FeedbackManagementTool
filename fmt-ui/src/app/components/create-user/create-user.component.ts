@@ -3,6 +3,7 @@ import {InputValidator} from "../../helpers/input-validator";
 import {CreateUserService} from "../../services/create-user.service";
 import {User} from "../../domain/user";
 import {Router} from "@angular/router";
+import {DataTransferService} from "../../services/data-transfer.service";
 
 @Component({
   selector: 'app-create-user',
@@ -19,9 +20,11 @@ export class CreateUserComponent implements OnInit {
   createdUser: User;
 
   createUserService: CreateUserService;
+  dataService: DataTransferService;
 
-  constructor(private createUserSrv: CreateUserService, private routerParam: Router) {
+  constructor(private createUserSrv: CreateUserService, private dataSrv: DataTransferService, private routerParam: Router) {
     this.createUserService = createUserSrv;
+    this.dataService = dataSrv;
     this.router = routerParam;
   }
 
@@ -36,8 +39,10 @@ export class CreateUserComponent implements OnInit {
       },
       error1 => {
         console.log(error1);
-      }, () =>
-        this.router.navigate(['createUserSuccess']));
+      }, () => {
+        this.dataSrv.setLoggedInUser(this.createdUser);
+        this.router.navigate(['createUserSuccess'])
+      });
   }
 
   inputIsInvalid(): boolean {

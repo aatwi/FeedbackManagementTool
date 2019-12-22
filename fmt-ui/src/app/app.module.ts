@@ -11,6 +11,7 @@ import {CommonModule} from "@angular/common";
 import {LoginSuccessComponent} from './components/login-status/login-success.component';
 import {CreateUserComponent} from "./components/create-user/create-user.component";
 import {CreateUserSuccessComponent} from './components/create-user-success/create-user-success.component';
+import {DataTransferService} from "./services/data-transfer.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import {CreateUserSuccessComponent} from './components/create-user-success/creat
     CommonModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    DataTransferService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
