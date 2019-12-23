@@ -51,12 +51,14 @@ describe('CreateUserComponent', () => {
   });
 
   it('should call InputValidator.validateUserCreationInput on data validation', () => {
-    spyOn(InputValidator, 'validateUserCreationInput');
+    spyOn(InputValidator, 'validateUserCreationInput').and.returnValue("AnyErrorMessage");
 
     userComponent.createUserButtonClicked = true;
-    userComponent.inputIsInvalid();
+    let result: boolean = userComponent.inputIsInvalid();
 
     expect(InputValidator.validateUserCreationInput).toHaveBeenCalled();
+    expect(result).toBe(true);
+    expect(userComponent.errorMessage).toBe("AnyErrorMessage");
   });
 
   it('inputIsInvalid should return false when all the data is invalid', () => {

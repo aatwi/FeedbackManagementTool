@@ -7,7 +7,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {InputValidator} from "../../helpers/input-validator";
 
 describe('LoginComponent', () => {
-  let wrongUserNamePassword = '*Wrong Username or Password!';
+  const WRONG_EMAIL_OR_PASSWORD_MESSAGE = '*Wrong Username or Password!';
   let loginComponent: LoginComponent;
 
   beforeEach(async(() => {
@@ -21,34 +21,26 @@ describe('LoginComponent', () => {
     })
       .compileComponents().then(() => {
       loginComponent = new LoginComponent(null, null);
-      loginComponent.userPassword = 'password';
-      loginComponent.userEmail = 'user@fmt.com';
         loginComponent.loginButtonClicked = true;
       }
     );
   }));
 
-  it('Should not raise and exception when email has the right format', () => {
-    loginComponent.userEmail = 'user@fmt.com';
-    expect(loginComponent.inputIsInvalid()).toEqual(false);
-  });
-
   it('Should call InputValidator.validateLoginInput on data validation', () => {
-    spyOn(InputValidator, 'validateLoginInput');
+    spyOn(InputValidator, 'validateLoginInput').and.returnValue("AnyErrorMessage");
 
     loginComponent.loginButtonClicked = true;
-    loginComponent.inputIsInvalid();
+    let result: boolean = loginComponent.inputIsInvalid();
 
     expect(InputValidator.validateLoginInput).toHaveBeenCalled();
+    expect(result).toBe(true);
+    expect(loginComponent.errorMessage).toBe("AnyErrorMessage")
   });
 
-  it('should raise an error if the user provided a wrong username or password', () => {
+  it("Should return the message '" + WRONG_EMAIL_OR_PASSWORD_MESSAGE + "' if the email provided does not exist or password is wrong.", () => {
     loginComponent.failedPassword = true;
-    assertWrongUserOrPassword();
+    expect(loginComponent.inputIsInvalid()).toEqual(true);
+    expect(loginComponent.errorMessage).toEqual(WRONG_EMAIL_OR_PASSWORD_MESSAGE);
   });
 
-  function assertWrongUserOrPassword() {
-    expect(loginComponent.inputIsInvalid()).toEqual(true);
-    expect(loginComponent.errorMessage).toEqual(wrongUserNamePassword);
-  }
 });
