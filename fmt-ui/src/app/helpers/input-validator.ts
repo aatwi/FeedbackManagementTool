@@ -14,6 +14,17 @@ export class InputValidator {
     return errorMessage;
   }
 
+  static validateLoginInput(userEmail: string, userPassword: string) {
+    let errorMessage: string;
+    if (!InputValidator.isEmailValid(userEmail)) {
+      errorMessage = '*Please enter a valid email!';
+    }
+    if (!InputValidator.isValidString(userPassword)) {
+      errorMessage = '*Please enter your password!';
+    }
+    return errorMessage;
+  }
+
   static isValidString(value: string): boolean {
     return value != undefined && value.length != 0;
   }

@@ -48,14 +48,13 @@ export class LoginComponent implements OnInit {
       if (this.failedPassword) {
         this.errorMessage = '*Wrong Username or Password!';
         return true;
-      }
-      if (!InputValidator.isEmailValid(this.userEmail)) {
-        this.errorMessage = '*Please enter a valid email!';
-        return true;
-      }
-      if (!InputValidator.isValidString(this.userPassword)) {
-        this.errorMessage = '*Please enter your password!';
-        return true;
+      } else {
+        let errorMsg: string;
+        errorMsg = InputValidator.validateLoginInput(this.userEmail, this.userPassword);
+        if (errorMsg) {
+          this.errorMessage = errorMsg;
+          return true;
+        }
       }
     }
     return false;
