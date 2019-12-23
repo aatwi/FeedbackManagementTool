@@ -45,12 +45,12 @@ describe('CreateUserComponent', () => {
     });
   }));
 
-  it('should call DataTransferService.setLoggedInUser on user creation', () => {
+  it('Should call DataTransferService.setLoggedInUser on user creation', () => {
     userComponent.createUser();
     expect(dataSrv.setLoggedInUser).toHaveBeenCalled();
   });
 
-  it('should call InputValidator.validateUserCreationInput on data validation', () => {
+  it('Should call InputValidator.validateUserCreationInput on data validation', () => {
     spyOn(InputValidator, 'validateUserCreationInput').and.returnValue("AnyErrorMessage");
 
     userComponent.createUserButtonClicked = true;
@@ -61,7 +61,7 @@ describe('CreateUserComponent', () => {
     expect(userComponent.errorMessage).toBe("AnyErrorMessage");
   });
 
-  it('inputIsInvalid should return false when all the data is invalid', () => {
+  it('Should return false all the data are valid', () => {
     userComponent.userEmail = "TestUser@email.com";
     userComponent.userName = "Test User";
     userComponent.password = "TestUserPassword";

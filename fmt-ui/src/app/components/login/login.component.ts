@@ -3,21 +3,22 @@ import {HashValueGenerator} from "../../helpers/hash-value-generator";
 import {LoginService} from "../../services/login.service";
 import {Router} from "@angular/router";
 import {InputValidator} from "../../helpers/input-validator";
+import {User} from "../../domain/user";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  router: Router;
   userEmail: string;
   userPassword: string;
   errorMessage: string;
   loginButtonClicked: boolean;
   failedPassword: boolean;
-  loggedInUser;
+  loggedInUser: User;
 
   loginService: LoginService;
+  router: Router;
 
 
   constructor(private serviceLogin: LoginService,
@@ -40,7 +41,9 @@ export class LoginComponent implements OnInit {
           console.log(error1);
           this.inputIsInvalid();
         },
-        () => this.router.navigate(['loginSuccess']));
+        () => {
+          this.router.navigate(['loginSuccess']);
+        });
   }
 
   inputIsInvalid(): boolean {

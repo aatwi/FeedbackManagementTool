@@ -10,19 +10,23 @@ import {DataTransferService} from "../../services/data-transfer.service";
   templateUrl: './create-user.component.html'
 })
 export class CreateUserComponent implements OnInit {
-  router: Router;
+  createUserButtonClicked: boolean;
+
   userEmail: string;
   userName: string;
   password: string;
   passwordReEntered: string;
-  createUserButtonClicked: boolean;
   errorMessage: string;
+
   createdUser: User;
 
   createUserService: CreateUserService;
   dataService: DataTransferService;
+  router: Router;
 
-  constructor(private createUserSrv: CreateUserService, private dataSrv: DataTransferService, private routerParam: Router) {
+  constructor(private createUserSrv: CreateUserService,
+              private dataSrv: DataTransferService,
+              private routerParam: Router) {
     this.createUserService = createUserSrv;
     this.dataService = dataSrv;
     this.router = routerParam;
@@ -42,7 +46,7 @@ export class CreateUserComponent implements OnInit {
         console.log(error);
       }, () => {
         this.dataSrv.setLoggedInUser(this.createdUser);
-        this.router.navigate(['createUserSuccess'])
+        this.router.navigate(['createUserSuccess']);
       });
   }
 
