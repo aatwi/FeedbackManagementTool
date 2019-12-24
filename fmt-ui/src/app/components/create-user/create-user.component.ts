@@ -10,19 +10,23 @@ import {DataTransferService} from "../../services/data-transfer.service";
   templateUrl: './create-user.component.html'
 })
 export class CreateUserComponent implements OnInit {
-  router: Router;
+  createUserButtonClicked: boolean;
+
   userEmail: string;
   userName: string;
   password: string;
   passwordReEntered: string;
-  createUserButtonClicked: boolean;
   errorMessage: string;
+
   createdUser: User;
 
   createUserService: CreateUserService;
   dataService: DataTransferService;
+  router: Router;
 
-  constructor(private createUserSrv: CreateUserService, private dataSrv: DataTransferService, private routerParam: Router) {
+  constructor(private createUserSrv: CreateUserService,
+              private dataSrv: DataTransferService,
+              private routerParam: Router) {
     this.createUserService = createUserSrv;
     this.dataService = dataSrv;
     this.router = routerParam;
@@ -34,40 +38,27 @@ export class CreateUserComponent implements OnInit {
   createUser() {
     this.createUserButtonClicked = true;
     let newUser = new User(this.userName, this.userEmail, this.password);
-    this.createUserService.createUser(newUser).subscribe(createdUser => {
+    this.createUserService.createUser(newUser).subscribe(
+      createdUser => {
         this.createdUser = createdUser;
       },
-      error1 => {
-        console.log(error1);
+      error => {
+        console.log(error);
       }, () => {
         this.dataSrv.setLoggedInUser(this.createdUser);
-        this.router.navigate(['createUserSuccess'])
+        this.router.navigate(['createUserSuccess']);
       });
   }
 
   inputIsInvalid(): boolean {
     if (this.createUserButtonClicked) {
-      if (!InputValidator.isEmailValid(this.userEmail)) {
-        this.errorMessage = '*Please enter a valid email!';
-        return true;
-      }
-      if (!InputValidator.isValidString(this.userName)) {
-        this.errorMessage = '*Please enter a valid name!';
-        return true;
-      }
-      if (!InputValidator.isValidString(this.password)) {
-        this.errorMessage = '*Please enter a valid password!';
-        return true;
-      }
-      if (CreateUserComponent.passwordDontMatch(this.password, this.passwordReEntered)) {
-        this.errorMessage = '*Passwords do not match!';
+      let errorMsg: string;
+      errorMsg = InputValidator.validateUserCreationInput(this.userEmail, this.userName, this.password, this.passwordReEntered);
+      if (errorMsg) {
+        this.errorMessage = errorMsg;
         return true;
       }
     }
     return false;
-  }
-
-  private static passwordDontMatch(password1: string, password2: string) {
-    return password1 != password2;
   }
 }

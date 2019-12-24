@@ -4,11 +4,10 @@ import {LoginComponent} from './login.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule} from "@angular/forms";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {InputValidator} from "../../helpers/input-validator";
 
 describe('LoginComponent', () => {
-  let emailErrorMessage = '*Please enter a valid email!';
-  let passwordErrorMessage = '*Please enter your password!';
-  let wrongUserNamePassword = '*Wrong Username or Password!';
+  const WRONG_EMAIL_OR_PASSWORD_MESSAGE = '*Wrong Username or Password!';
   let loginComponent: LoginComponent;
 
   beforeEach(async(() => {
@@ -22,76 +21,26 @@ describe('LoginComponent', () => {
     })
       .compileComponents().then(() => {
       loginComponent = new LoginComponent(null, null);
-      loginComponent.userPassword = 'password';
-      loginComponent.userEmail = 'user@fmt.com';
         loginComponent.loginButtonClicked = true;
       }
     );
   }));
 
-  it('should notify the user when then email empty', () => {
-    loginComponent.userEmail = '';
-    assertInvalidEmail();
+  it('Should call InputValidator.validateLoginInput on data validation', () => {
+    spyOn(InputValidator, 'validateLoginInput').and.returnValue("AnyErrorMessage");
+
+    loginComponent.loginButtonClicked = true;
+    let result: boolean = loginComponent.inputIsInvalid();
+
+    expect(InputValidator.validateLoginInput).toHaveBeenCalled();
+    expect(result).toBe(true);
+    expect(loginComponent.errorMessage).toBe("AnyErrorMessage")
   });
 
-  it('should notify the user when the email is undefined', () => {
-    loginComponent.userEmail = undefined;
-    assertInvalidEmail();
-  });
-
-  it('should notify the user when they enter an email without the @', () => {
-    loginComponent.userEmail = 'user.com';
-    assertInvalidEmail();
-  });
-
-  it('should notify the user when they enter an email without the @ and .domain ', () => {
-    loginComponent.userEmail = 'user';
-    assertInvalidEmail();
-  });
-
-  it('should notify the user when they enter an email without the domain ', () => {
-    loginComponent.userEmail = 'user@fmt.';
-    assertInvalidEmail();
-  });
-
-  it('should notify the user when they enter an email without the .domain ', () => {
-    loginComponent.userEmail = 'user@fmt';
-    assertInvalidEmail();
-  });
-
-  it('should not raise and exception when email has the right format', () => {
-    loginComponent.userEmail = 'user@fmt.com';
-    expect(loginComponent.inputIsInvalid()).toEqual(false);
-  });
-
-  it('should raise an error if the password is undefined', () => {
-    loginComponent.userPassword = undefined;
-    assertInvalidPassword();
-  });
-
-  it('should raise an error if the password is left empty', () => {
-    loginComponent.userPassword = '';
-    assertInvalidPassword();
-  });
-
-  it('should raise an error if the user provided a wrong username or password', () => {
+  it("Should return the message '" + WRONG_EMAIL_OR_PASSWORD_MESSAGE + "' if the email provided does not exist or password is wrong.", () => {
     loginComponent.failedPassword = true;
-    assertWrongUserOrPassword();
+    expect(loginComponent.inputIsInvalid()).toEqual(true);
+    expect(loginComponent.errorMessage).toEqual(WRONG_EMAIL_OR_PASSWORD_MESSAGE);
   });
-
-  function assertWrongUserOrPassword() {
-    expect(loginComponent.inputIsInvalid()).toEqual(true);
-    expect(loginComponent.errorMessage).toEqual(wrongUserNamePassword);
-  }
-
-  function assertInvalidPassword() {
-    expect(loginComponent.inputIsInvalid()).toEqual(true);
-    expect(loginComponent.errorMessage).toEqual(passwordErrorMessage);
-  }
-
-  function assertInvalidEmail() {
-    expect(loginComponent.inputIsInvalid()).toEqual(true);
-    expect(loginComponent.errorMessage).toEqual(emailErrorMessage);
-  }
 
 });

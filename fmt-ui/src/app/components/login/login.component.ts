@@ -3,21 +3,22 @@ import {HashValueGenerator} from "../../helpers/hash-value-generator";
 import {LoginService} from "../../services/login.service";
 import {Router} from "@angular/router";
 import {InputValidator} from "../../helpers/input-validator";
+import {User} from "../../domain/user";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  router: Router;
   userEmail: string;
   userPassword: string;
   errorMessage: string;
   loginButtonClicked: boolean;
   failedPassword: boolean;
-  loggedInUser;
+  loggedInUser: User;
 
   loginService: LoginService;
+  router: Router;
 
 
   constructor(private serviceLogin: LoginService,
@@ -40,7 +41,9 @@ export class LoginComponent implements OnInit {
           console.log(error1);
           this.inputIsInvalid();
         },
-        () => this.router.navigate(['loginSuccess']));
+        () => {
+          this.router.navigate(['loginSuccess']);
+        });
   }
 
   inputIsInvalid(): boolean {
@@ -48,14 +51,13 @@ export class LoginComponent implements OnInit {
       if (this.failedPassword) {
         this.errorMessage = '*Wrong Username or Password!';
         return true;
-      }
-      if (!InputValidator.isEmailValid(this.userEmail)) {
-        this.errorMessage = '*Please enter a valid email!';
-        return true;
-      }
-      if (!InputValidator.isValidString(this.userPassword)) {
-        this.errorMessage = '*Please enter your password!';
-        return true;
+      } else {
+        let errorMsg: string;
+        errorMsg = InputValidator.validateLoginInput(this.userEmail, this.userPassword);
+        if (errorMsg) {
+          this.errorMessage = errorMsg;
+          return true;
+        }
       }
     }
     return false;
