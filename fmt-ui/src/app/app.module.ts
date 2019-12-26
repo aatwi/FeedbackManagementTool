@@ -4,13 +4,12 @@ import {HttpClientModule} from "@angular/common/http";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoginComponent} from './components/login/login.component';
+import {LoginComponent} from './components/user-access/login/login.component';
 import {HomeComponent} from './components/home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {LoginSuccessComponent} from './components/login-status/login-success.component';
-import {CreateUserComponent} from "./components/create-user/create-user.component";
-import {CreateUserSuccessComponent} from './components/create-user-success/create-user-success.component';
+import {CreateUserComponent} from "./components/user-access/create-user/create-user.component";
+import {UserHomePage} from './components/feedback/user-home-page/user-home-page.component';
 import {DataTransferService} from "./services/data-transfer.service";
 
 @NgModule({
@@ -19,8 +18,7 @@ import {DataTransferService} from "./services/data-transfer.service";
     LoginComponent,
     CreateUserComponent,
     HomeComponent,
-    LoginSuccessComponent,
-    CreateUserSuccessComponent
+    UserHomePage
   ],
   imports: [
     BrowserModule,

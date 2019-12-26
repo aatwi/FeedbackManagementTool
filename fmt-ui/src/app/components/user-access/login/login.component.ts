@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {HashValueGenerator} from "../../helpers/hash-value-generator";
-import {LoginService} from "../../services/login.service";
+import {HashValueGenerator} from "../../../helpers/hash-value-generator";
+import {LoginService} from "../../../services/user-access/login.service";
 import {Router} from "@angular/router";
-import {InputValidator} from "../../helpers/input-validator";
-import {User} from "../../domain/user";
+import {InputValidator} from "../../../helpers/input-validator";
+import {User} from "../../../domain/user";
 
 @Component({
   selector: 'app-login',

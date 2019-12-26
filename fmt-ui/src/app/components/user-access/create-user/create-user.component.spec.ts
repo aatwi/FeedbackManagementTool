@@ -2,14 +2,14 @@ import {async, TestBed} from '@angular/core/testing';
 
 import {CreateUserComponent} from './create-user.component';
 import {FormsModule} from "@angular/forms";
-import {DataTransferService} from "../../services/data-transfer.service";
-import {CreateUserService} from "../../services/create-user.service";
+import {DataTransferService} from "../../../services/data-transfer.service";
+import {CreateUserService} from "../../../services/user-access/create-user.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {AppModule} from "../../app.module";
+import {AppModule} from "../../../app.module";
 import {RouterTestingModule} from "@angular/router/testing";
-import {User} from "../../domain/user";
+import {User} from "../../../domain/user";
 import {Observable, of} from "rxjs";
-import {InputValidator} from "../../helpers/input-validator";
+import {InputValidator} from "../../../helpers/input-validator";
 
 describe('CreateUserComponent', () => {
   let userComponent: CreateUserComponent;
