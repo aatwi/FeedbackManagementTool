@@ -4,7 +4,7 @@ import {LoginComponent} from './login.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule} from "@angular/forms";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {InputValidator} from "../../helpers/input-validator";
+import {InputValidator} from "../../../helpers/input-validator";
 
 describe('LoginComponent', () => {
   const WRONG_EMAIL_OR_PASSWORD_MESSAGE = '*Wrong Username or Password!';

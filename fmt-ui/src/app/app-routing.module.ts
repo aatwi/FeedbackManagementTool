@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./components/login/login.component";
+import {LoginComponent} from "./components/user-access/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
-import {CreateUserComponent} from "./components/create-user/create-user.component";
+import {CreateUserComponent} from "./components/user-access/create-user/create-user.component";
 import {UserHomePage} from "./components/feedback/user-home-page/user-home-page.component";
 
 
