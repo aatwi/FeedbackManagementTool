@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {InputValidator} from "../../../helpers/input-validator";
-import {CreateUserService} from "../../../services/create-user.service";
+import {CreateUserService} from "../../../services/user-access/create-user.service";
 import {User} from "../../../domain/user";
 import {Router} from "@angular/router";
 import {DataTransferService} from "../../../services/data-transfer.service";
