@@ -13,6 +13,7 @@ import {UserHomePage} from './components/feedback/user-home-page/user-home-page.
 import {DataTransferService} from "./services/data-transfer.service";
 import {StartSessionComponent} from './components/feedback/start-session.component';
 import {MatDatepickerModule, MatIconModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MatDatepickerModule, MatIconModule, MatInputModule, MatNativeDateModule}
     MatInputModule,
     MatNativeDateModule,
     MatIconModule,
+    BrowserAnimationsModule
   ],
   providers: [
     DataTransferService
