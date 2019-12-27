@@ -3,6 +3,7 @@ import {Session} from "../../domain/session";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepickerInputEvent} from "@angular/material";
 import {MomentDateAdapter} from "@angular/material-moment-adapter";
 import {Moment} from "moment";
+import {DateHelper} from "../../helpers/date-helper";
 
 export const DATE_FORMAT = {
   parse: {
@@ -29,7 +30,7 @@ export class StartSessionComponent implements OnInit {
 
   createdSession: Session;
   minStartDate = new Date();
-  minEndDate = new Date(new Date().setDate(this.minStartDate.getDate() + 1));
+  minEndDate = DateHelper.getNextDayOf(this.minStartDate);
 
   constructor() {
   }
@@ -43,7 +44,7 @@ export class StartSessionComponent implements OnInit {
 
   changeStartDate(event: MatDatepickerInputEvent<Moment>) {
     this.sessionStartDate = event.value.toDate();
-    this.minEndDate = new Date(new Date().setDate(this.sessionStartDate.getDate() + 1));
+    this.minEndDate = DateHelper.getNextDayOf(this.minStartDate);
   }
 
   changeEndDate(event: MatDatepickerInputEvent<Moment>) {
