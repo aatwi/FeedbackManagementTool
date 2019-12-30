@@ -1,21 +1,30 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 
 import {StartSessionComponent} from './start-session.component';
+import {Session} from "../../domain/session";
+import {AppModule} from "../../app.module";
 
 describe('StartSessionComponent', () => {
-  let component: StartSessionComponent;
-  let fixture: ComponentFixture<StartSessionComponent>;
+  let sessionComponent: StartSessionComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StartSessionComponent]
+      imports: [
+        AppModule],
+      declarations: []
     })
-      .compileComponents();
+      .compileComponents().then(() => {
+      sessionComponent = TestBed.createComponent(StartSessionComponent).componentInstance;
+      sessionComponent.sessionName = 'Session Name';
+      sessionComponent.sessionStartDate = new Date(2019, 12, 31);
+      sessionComponent.sessionEndDate = new Date(2020, 1, 15);
+    });
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(StartSessionComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('Should create an instance of the Session object when the method createSession is called', () => {
+    sessionComponent.createSession();
+    const expectedSession: Session = new Session('Session Name', new Date(2019, 12, 31), new Date(2020, 1, 15));
+    expect(sessionComponent.createdSession).toEqual(expectedSession);
   });
+
 });
