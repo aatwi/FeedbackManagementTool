@@ -121,8 +121,8 @@ public class Session
         Session session = (Session) o;
         return Objects.equals(id, session.id) &&
             Objects.equals(name, session.name) &&
-            Objects.equals(startDate, session.startDate) &&
-            Objects.equals(endDate, session.endDate);
+            Objects.equals(startDate.toString(), session.startDate.toString()) &&
+            Objects.equals(endDate.toString(), session.endDate.toString());
     }
 
 

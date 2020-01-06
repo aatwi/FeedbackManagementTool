@@ -16,7 +16,7 @@ public final class SessionDTOBuilder
     }
 
 
-    public SessionDTOBuilder newSessionDTOBuilder()
+    public static SessionDTOBuilder newSessionDTOBuilder()
     {
         return new SessionDTOBuilder();
     }

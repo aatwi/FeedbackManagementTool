@@ -88,8 +88,8 @@ public final class SessionDTO
         SessionDTO that = (SessionDTO) o;
         return Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(startDate, that.startDate) &&
-            Objects.equals(endDate, that.endDate);
+            Objects.equals(startDate.toString(), that.startDate.toString()) &&
+            Objects.equals(endDate.toString(), that.endDate.toString());
     }
 
 
