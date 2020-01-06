@@ -2,7 +2,7 @@ package dev.aatwi.fmtservices.dto;
 
 import java.util.Objects;
 
-public class UserDTO
+public final class UserDTO
 {
     private String email;
     private String name;
