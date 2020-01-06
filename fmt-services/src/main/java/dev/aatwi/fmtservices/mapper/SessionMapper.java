@@ -8,6 +8,11 @@ import static dev.aatwi.fmtservices.model.SessionBuilder.newSessionBuilder;
 
 public final class SessionMapper
 {
+    private SessionMapper()
+    {
+    }
+
+
     public static Session convertSessionDTOToSession(SessionDTO sessionDTO)
     {
         return newSessionBuilder()

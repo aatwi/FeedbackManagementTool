@@ -5,8 +5,15 @@ import dev.aatwi.fmtservices.model.User;
 
 import static dev.aatwi.fmtservices.dto.UserDTOBuilder.newUserDTOBuilder;
 
-public class UserMapper
+public final class UserMapper
 {
+
+    private UserMapper()
+    {
+
+    }
+
+
     public static User convertUserDTOtoUser(UserDTO userDTO)
     {
         return new User(userDTO.getEmail(), userDTO.getName(), userDTO.getPassword());
