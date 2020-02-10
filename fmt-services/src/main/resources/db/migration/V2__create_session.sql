@@ -1,8 +1,0 @@
-CREATE TABLE SESSION
-(
-
-    ID         BIGINT PRIMARY KEY,
-    NAME       VARCHAR(255),
-    START_DATE DATE,
-    END_DATE   DATE
-);

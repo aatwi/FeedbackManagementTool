@@ -1,20 +1,21 @@
 package dev.aatwi.fmtservices.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity(name = "SESSION")
-@Table(
-    name = "SESSION"
-)
-@SequenceGenerator(name = "session", allocationSize = 100)
-public class Session
-{
+@Table(name = "SESSION")
+public class Session {
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "session")
     @Id
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private Long id;
 
     @Column(nullable = false)
@@ -30,22 +31,19 @@ public class Session
     private Date endDate;
 
 
-    public Session()
-    {
+    public Session() {
 
     }
 
 
-    public Session(String name, Date startDate, Date endDate)
-    {
+    public Session(String name, Date startDate, Date endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
 
-    public Session(long id, String name, Date startDate, Date endDate)
-    {
+    public Session(long id, String name, Date startDate, Date endDate) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -53,81 +51,73 @@ public class Session
     }
 
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
 
-    public Date getStartDate()
-    {
+    public Date getStartDate() {
         return startDate;
     }
 
 
-    public void setStartDate(Date startDate)
-    {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
 
-    public Date getEndDate()
-    {
+    public Date getEndDate() {
         return endDate;
     }
 
 
-    public void setEndDate(Date endDate)
-    {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
 
-    @Override public String toString()
-    {
+    @Override
+    public String toString() {
         return "Session{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", startDate=" + startDate +
-            ", endDate=" + endDate +
-            '}';
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 
 
-    @Override public boolean equals(Object o)
-    {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
         Session session = (Session) o;
         return Objects.equals(id, session.id) &&
-            Objects.equals(name, session.name) &&
-            Objects.equals(startDate.toString(), session.startDate.toString()) &&
-            Objects.equals(endDate.toString(), session.endDate.toString());
+                Objects.equals(name, session.name) &&
+                Objects.equals(startDate.toString(), session.startDate.toString()) &&
+                Objects.equals(endDate.toString(), session.endDate.toString());
     }
 
 
-    @Override public int hashCode()
-    {
+    @Override
+    public int hashCode() {
         return Objects.hash(id, name, startDate, endDate);
     }
 }

@@ -15,8 +15,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = FmtServicesApplication.class)
-public class UserServiceImplTest
-{
+public class UserServiceImplTest {
     @Autowired
     private UserService userService;
     @MockBean
@@ -25,13 +24,12 @@ public class UserServiceImplTest
 
     @Test
     public void
-    it_should_add_a_newUser_to_the_repository()
-    {
+    it_should_add_a_newUser_to_the_repository() {
         User createdUser = UserBuilder.newUserBuilder()
-            .withEmail("email@email.com")
-            .withName("User Name")
-            .withPassword("testPassword")
-            .build();
+                .withEmail("email@email.com")
+                .withName("User Name")
+                .withPassword("testPassword")
+                .build();
         when(userRepository.save(any(User.class))).thenReturn(createdUser);
 
         assertEquals(createdUser, userService.saveUser(createdUser));
@@ -40,23 +38,23 @@ public class UserServiceImplTest
 
     @Test
     public void
-    it_should_get_all_users_from_repository()
-    {
+    it_should_get_all_users_from_repository() {
 
         User userOne = UserBuilder.newUserBuilder()
-            .withEmail("email1@email.com")
-            .withName("User One")
-            .withPassword("UserOnePassword")
-            .build();
+                .withEmail("email1@email.com")
+                .withName("User One")
+                .withPassword("UserOnePassword")
+                .build();
 
         User userTwo = UserBuilder.newUserBuilder()
-            .withEmail("email1@email.com")
-            .withName("User One")
-            .withPassword("UserOnePassword")
-            .build();
+                .withEmail("email1@email.com")
+                .withName("User One")
+                .withPassword("UserOnePassword")
+                .build();
 
         when(userRepository.findAll()).thenReturn(Lists.newArrayList(userOne, userTwo));
 
         assertEquals(Lists.newArrayList(userOne, userTwo), userService.getAllUsers());
     }
 }
+    
