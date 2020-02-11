@@ -21,7 +21,6 @@ public class UserServiceImplTest {
     @MockBean
     private UserRepository userRepository;
 
-
     @Test
     public void
     it_should_add_a_newUser_to_the_repository() {
@@ -35,11 +34,9 @@ public class UserServiceImplTest {
         assertEquals(createdUser, userService.saveUser(createdUser));
     }
 
-
     @Test
     public void
     it_should_get_all_users_from_repository() {
-
         User userOne = UserBuilder.newUserBuilder()
                 .withEmail("email1@email.com")
                 .withName("User One")

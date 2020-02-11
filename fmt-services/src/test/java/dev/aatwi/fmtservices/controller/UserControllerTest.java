@@ -33,7 +33,6 @@ public class UserControllerTest
     @Autowired
     private MockMvc mockMvc;
 
-
     @Test
     public void
     it_should_add_a_newUser_to_the_repository() throws Exception
@@ -58,7 +57,6 @@ public class UserControllerTest
             .andExpect(jsonPath("$.name", is(createdUser.getName())))
             .andExpect(jsonPath("$.password", is(createdUser.getPassword())));
     }
-
 
     @Test
     @Disabled("To be implemented Later")
@@ -87,7 +85,6 @@ public class UserControllerTest
             .andExpect(jsonPath("$[0].email", is(bob.getEmail())))
             .andExpect(jsonPath("$[1].email", is(john.getEmail())));
     }
-
 
     @AfterEach
     public void

@@ -51,7 +51,6 @@ class SessionMapperTest {
                         .build()));
     }
 
-
     private Date getDate(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);

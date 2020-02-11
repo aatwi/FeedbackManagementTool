@@ -9,7 +9,6 @@ public final class SessionDTO {
     private Date startDate;
     private Date endDate;
 
-
     public SessionDTO(Long id, String name, Date startDate, Date endDate) {
         this.id = id;
         this.name = name;
@@ -17,46 +16,25 @@ public final class SessionDTO {
         this.endDate = endDate;
     }
 
-
     public Long getId() {
         return id;
     }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 
     public String getName() {
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
-
 
     public Date getStartDate() {
         return startDate;
     }
 
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-
     public Date getEndDate() {
         return endDate;
     }
-
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
 
     @Override
     public String toString() {
@@ -67,7 +45,6 @@ public final class SessionDTO {
                 ", endDate=" + endDate +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -81,7 +58,6 @@ public final class SessionDTO {
                 Objects.equals(startDate.toString(), that.startDate.toString()) &&
                 Objects.equals(endDate.toString(), that.endDate.toString());
     }
-
 
     @Override
     public int hashCode() {
