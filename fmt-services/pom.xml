@@ -7,6 +7,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.9.RELEASE</version>
     </parent>
+
     <groupId>dev.aatwi</groupId>
     <artifactId>fmt-services</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -16,6 +17,10 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <version.google.guava>28.0-jre</version.google.guava>
+        <version.google.gson>2.8.5</version.google.gson>
+        <version.mockito>3.1.0</version.mockito>
+        <version.junit>5.5.2</version.junit>
     </properties>
 
     <dependencies>
@@ -40,22 +45,15 @@
             <scope>runtime</scope>
         </dependency>
 
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>28.0-jre</version>
+            <version>${version.google.guava}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.5</version>
-            <scope>compile</scope>
+            <version>${version.google.gson}</version>
         </dependency>
 
         <!--For Testing-->
@@ -65,7 +63,6 @@
             <scope>test</scope>
 
             <!-- exclude junit 4 -->
-
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -77,21 +74,21 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.5.2</version>
+            <version>${version.junit}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.1.0</version>
+            <version>${version.mockito}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>3.1.0</version>
+            <version>${version.mockito}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
