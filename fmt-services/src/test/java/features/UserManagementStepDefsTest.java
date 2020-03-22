@@ -12,13 +12,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import static features.UrlBuilder.USER_CREATION_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.HttpStatus.CREATED;
 
 public class UserManagementStepDefsTest {
-
-    private static final String USER_MANAGEMENT_URL = "http://localhost:8082/api/users";
-    private static final String USER_CREATION_URL = USER_MANAGEMENT_URL + "/create/";
 
     @Autowired
     private RestTemplate restTemplate;

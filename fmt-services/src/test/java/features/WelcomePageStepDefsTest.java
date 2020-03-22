@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+import static features.UrlBuilder.HOME_PAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WelcomePageStepDefsTest {
@@ -18,8 +19,7 @@ public class WelcomePageStepDefsTest {
     @Autowired
     RestTemplate restTemplate;
 
-    String url = "http://localhost:8082/";
-    String response;
+    String welcomeResponse;
 
     @Given("The system is up and running")
     public void theSystemIsUpAndRunning() {
@@ -27,7 +27,7 @@ public class WelcomePageStepDefsTest {
 
     @When("A user navigates to the home page")
     public void aUserNavigatesToTheHomePage() {
-        response = restTemplate.execute(url, HttpMethod.GET, null, clientHttpResponse -> {
+        welcomeResponse = restTemplate.execute(HOME_PAGE, HttpMethod.GET, null, clientHttpResponse -> {
             InputStream responseStream = clientHttpResponse.getBody();
             return IOUtils.toString(responseStream, Charset.defaultCharset());
         });
@@ -35,6 +35,6 @@ public class WelcomePageStepDefsTest {
 
     @Then("The user receives the welcome message {string}")
     public void theUserReceivesTheWelcomeMessage(String message) {
-        assertEquals(message, response);
+        assertEquals(message, welcomeResponse);
     }
 }
