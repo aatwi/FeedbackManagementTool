@@ -1,36 +1,52 @@
 package features;
 
-import io.cucumber.java.PendingException;
+import com.google.gson.Gson;
+import features.data.UserFeature;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
-public class UserManagementStepDefsTest extends SpringIntegrationTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.http.HttpStatus.CREATED;
 
-    String url = "http://localhost:8082/";
+public class UserManagementStepDefsTest {
+
+    private static final String USER_MANAGEMENT_URL = "http://localhost:8082/api/users";
+    private static final String USER_CREATION_URL = USER_MANAGEMENT_URL + "/create/";
+
+    @Autowired
+    private RestTemplate restTemplate;
+    private ResponseEntity<String> userCreatedResponseEntity;
+    private UserFeature userToBeCreated;
 
     @Given("A user sends a request to create a new account in the system")
     public void aUserSendsARequestToCreateANewAccountInTheSystem() {
-        throwPendingException();
     }
 
     @When("The user inputs the required information {string} {word} {word}")
     public void theUserInputsTheRequiredInformationNameEmailPassword(String name, String email, String password) {
-        throwPendingException();
+        userToBeCreated = new UserFeature(email, name, password);
+        userCreatedResponseEntity = restTemplate.postForEntity(USER_CREATION_URL, new HttpEntity<>(userToBeCreated), String.class);
     }
 
     @Then("An account should be created in the system")
     public void anAccountShouldBeCreatedInTheSystem() {
-        throwPendingException();
+        Gson gson = new Gson();
+        UserFeature userFeature = gson.fromJson(userCreatedResponseEntity.getBody(), UserFeature.class);
+
+        Assertions.assertEquals(userToBeCreated.getName(), userFeature.getName());
+        Assertions.assertEquals(userToBeCreated.getEmail(), userFeature.getEmail());
+        Assertions.assertEquals(userToBeCreated.getPassword(), userFeature.getPassword());
     }
 
     @And("The user should receive a Success notification")
     public void theUserShouldReceiveASuccessNotification() {
-        throwPendingException();
-    }
-
-    private void throwPendingException() {
-        throw new PendingException();
+        assertEquals(CREATED, userCreatedResponseEntity.getStatusCode());
     }
 }

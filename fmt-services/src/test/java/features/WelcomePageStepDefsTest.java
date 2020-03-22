@@ -4,17 +4,21 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WelcomePageStepDefsTest extends SpringIntegrationTest {
+public class WelcomePageStepDefsTest {
+
+    @Autowired
+    RestTemplate restTemplate;
 
     String url = "http://localhost:8082/";
-
     String response;
 
     @Given("The system is up and running")

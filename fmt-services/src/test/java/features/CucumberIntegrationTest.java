@@ -6,5 +6,5 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", strict = true, plugin = {"pretty"})
-public class CucumberIntegrationTest extends SpringIntegrationTest {
+public class CucumberIntegrationTest {
 }

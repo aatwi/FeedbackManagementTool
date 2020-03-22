@@ -27,7 +27,6 @@ public class UserController {
     }
 
     @PostMapping(value = "/create/")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         try {
             User createdUser = userService.saveUser(convertUserDTOtoUser(userDTO));
