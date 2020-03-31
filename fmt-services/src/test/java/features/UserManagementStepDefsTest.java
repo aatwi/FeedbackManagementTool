@@ -3,7 +3,6 @@ package features;
 import com.google.gson.Gson;
 import features.data.UserFeature;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
@@ -22,10 +21,6 @@ public class UserManagementStepDefsTest {
     private RestTemplate restTemplate;
     private ResponseEntity<String> userCreatedResponseEntity;
     private UserFeature userToBeCreated;
-
-    @Given("A user sends a request to create a new account in the system")
-    public void aUserSendsARequestToCreateANewAccountInTheSystem() {
-    }
 
     @When("The user inputs the required information {string} {word} {word}")
     public void theUserInputsTheRequiredInformationNameEmailPassword(String name, String email, String password) {
