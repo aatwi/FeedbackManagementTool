@@ -1,21 +1,23 @@
 package dev.aatwi.fmtservices.model;
 
 import com.google.common.base.Strings;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity(name = "USER")
-@Table(
-        name = "USER",
-        uniqueConstraints = @UniqueConstraint(name = "uc_email", columnNames = {"EMAIL"})
-)
 public class User {
+
     @Id
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "EMAIL")
+    @GeneratedValue(generator = "UUID")
+    @Column(name = "USER_ID", unique = true)
+    private Long userId;
+
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -33,6 +35,14 @@ public class User {
         this.email = email;
         this.name = name;
         this.password = password;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -59,10 +69,15 @@ public class User {
         this.password = password;
     }
 
+    public boolean isNull() {
+        return Strings.isNullOrEmpty(email);
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
+                "userId=" + userId +
+                ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
@@ -70,22 +85,17 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(email, user.email) &&
+        return Objects.equals(userId, user.userId) &&
+                Objects.equals(email, user.email) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, password);
-    }
-
-    public boolean isNull() {
-        return Strings.isNullOrEmpty(email);
+        return Objects.hash(userId, email, name, password);
     }
 }

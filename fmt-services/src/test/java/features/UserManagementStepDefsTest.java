@@ -3,17 +3,18 @@ package features;
 import com.google.gson.Gson;
 import features.data.UserFeature;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import static features.UrlBuilder.USER_CREATION_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.http.HttpStatus.CREATED;
 
 public class UserManagementStepDefsTest {
 
@@ -21,25 +22,41 @@ public class UserManagementStepDefsTest {
     private RestTemplate restTemplate;
     private ResponseEntity<String> userCreatedResponseEntity;
     private UserFeature userToBeCreated;
+    private UserFeature createdUser;
 
-    @When("The user inputs the required information {string} {word} {word}")
-    public void theUserInputsTheRequiredInformationNameEmailPassword(String name, String email, String password) {
+    @Given("The user is on the Create New Account page")
+    public void theUserIsOnTheCreateNewAccountPage() {
+    }
+
+    @When("The user inputs the required information {string} {string} {string}")
+    public void theUserInputsTheRequiredInformation(String name, String email, String password) {
         userToBeCreated = new UserFeature(email, name, password);
-        userCreatedResponseEntity = restTemplate.postForEntity(USER_CREATION_URL, new HttpEntity<>(userToBeCreated), String.class);
+        try {
+            userCreatedResponseEntity = restTemplate.postForEntity(USER_CREATION_URL, new HttpEntity<>(userToBeCreated), String.class);
+        } catch (RestClientResponseException exp) {
+            userCreatedResponseEntity = ResponseEntity.status(exp.getRawStatusCode()).body(exp.getResponseBodyAsString());
+        }
     }
 
-    @Then("An account should be created in the system")
-    public void anAccountShouldBeCreatedInTheSystem() {
+    @Then("The system should try to create an account")
+    public void theSystemShouldTryToCreateAnAccount() {
         Gson gson = new Gson();
-        UserFeature userFeature = gson.fromJson(userCreatedResponseEntity.getBody(), UserFeature.class);
-
-        Assertions.assertEquals(userToBeCreated.getName(), userFeature.getName());
-        Assertions.assertEquals(userToBeCreated.getEmail(), userFeature.getEmail());
-        Assertions.assertEquals(userToBeCreated.getPassword(), userFeature.getPassword());
+        createdUser = gson.fromJson(userCreatedResponseEntity.getBody(), UserFeature.class);
     }
 
-    @And("The user should receive a Success notification")
-    public void theUserShouldReceiveASuccessNotification() {
-        assertEquals(CREATED, userCreatedResponseEntity.getStatusCode());
+    @And("The user should receive a notification with response {string}")
+    public void theUserShouldReceiveANotificationWithResponse(String expectedResponse) {
+        HttpStatus statusCode = userCreatedResponseEntity.getStatusCode();
+        assertEquals(expectedResponse, statusCode.getReasonPhrase());
+
+        if (statusCode.equals(HttpStatus.CREATED)) {
+            assertUserObject();
+        }
+    }
+
+    private void assertUserObject() {
+        assertEquals(userToBeCreated.getName(), createdUser.getName());
+        assertEquals(userToBeCreated.getEmail(), createdUser.getEmail());
+        assertEquals(userToBeCreated.getPassword(), createdUser.getPassword());
     }
 }
