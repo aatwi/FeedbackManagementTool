@@ -3,7 +3,7 @@ import {DataTransferService} from "../../../services/data-transfer.service";
 import {User} from "../../../domain/user";
 
 @Component({
-  selector: 'app-create-user-success',
+  selector: 'app-user-home-page',
   templateUrl: './user-home-page.component.html',
   styleUrls: ['./user-home-page.component.css']
 })

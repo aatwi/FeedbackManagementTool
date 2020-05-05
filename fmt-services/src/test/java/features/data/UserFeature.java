@@ -1,13 +1,14 @@
-package dev.aatwi.fmtservices.dto;
+package features.data;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public final class UserDTO {
+public class UserFeature implements Serializable {
     private String email;
     private String name;
     private String password;
 
-    protected UserDTO(String email, String name, String password) {
+    public UserFeature(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -39,8 +40,8 @@ public final class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "  email='" + email + '\'' +
+        return "UserFeature{" +
+                "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
@@ -52,10 +53,10 @@ public final class UserDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(email, userDTO.email) &&
-                Objects.equals(name, userDTO.name) &&
-                Objects.equals(password, userDTO.password);
+        UserFeature userFeature = (UserFeature) o;
+        return Objects.equals(email, userFeature.email) &&
+                Objects.equals(name, userFeature.name) &&
+                Objects.equals(password, userFeature.password);
     }
 
     @Override

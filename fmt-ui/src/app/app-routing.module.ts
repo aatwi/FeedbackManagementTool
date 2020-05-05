@@ -4,6 +4,7 @@ import {LoginComponent} from "./components/user-access/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
 import {CreateUserComponent} from "./components/user-access/create-user/create-user.component";
 import {UserHomePage} from "./components/feedback/user-home-page/user-home-page.component";
+import {StartSessionComponent} from "./components/feedback/start-session.component";
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "loginSuccess", component: UserHomePage},
   {path: "createUser", component: CreateUserComponent},
-  {path: "createUserSuccess", component: UserHomePage}
+  {path: "createUserSuccess", component: UserHomePage},
+  {path: "createSession", component: StartSessionComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,31 @@
+<div class="card customer-input">
+  <div class="col-md-6 section">
+    <div class='group-input'>
+      <div class='input-title'>Name:</div>
+      <input class='input-text-box' [(ngModel)]='sessionName'/>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput [min]="minStartDate" [matDatepicker]="startDatepicker" required placeholder="Start Date"
+               (dateChange)="changeStartDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="startDatepicker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #startDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput [min]="minEndDate" [matDatepicker]="endDatepicker" required placeholder="End Date"
+               (dateChange)="changeEndDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="endDatepicker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #endDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="group-input">
+      <button mat-raised-button color="primary" (click)="createSession()">Create Session</button>
+    </div>
+  </div>
+</div>
