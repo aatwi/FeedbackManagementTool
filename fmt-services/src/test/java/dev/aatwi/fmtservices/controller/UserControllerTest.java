@@ -24,7 +24,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
+
     public static final String USER_CREATION_URL = "/api/users/create/";
+    private final UserDTO userDTOToCreate = newUserDTOBuilder()
+            .withEmail("email@email.com")
+            .withName("User Name")
+            .withPassword("testPassword")
+            .build();
 
     @MockBean
     private UserService userService;
@@ -34,12 +40,6 @@ public class UserControllerTest {
     @Test
     public void
     it_should_add_a_newUser_to_the_repository() throws Exception {
-        UserDTO userDTOToCreate = newUserDTOBuilder()
-                .withEmail("email@email.com")
-                .withName("User Name")
-                .withPassword("testPassword")
-                .build();
-
         User createdUser = convertUserDTOtoUser(userDTOToCreate);
         createdUser.setUserId(123L);
 
@@ -52,12 +52,6 @@ public class UserControllerTest {
     @Test
     public void
     it_should_throw_an_exception_when_creating_two_accounts_with_same_email() throws Exception {
-        UserDTO userDTOToCreate = newUserDTOBuilder()
-                .withEmail("email@email.com")
-                .withName("User Name")
-                .withPassword("testPassword")
-                .build();
-
         when(userService.saveUser(convertUserDTOtoUser(userDTOToCreate))).thenThrow(RestClientResponseException.class);
 
         ResultActions resultActions = performCreateUserAPICall(userDTOToCreate);

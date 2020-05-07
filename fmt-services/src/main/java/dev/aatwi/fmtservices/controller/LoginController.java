@@ -2,7 +2,6 @@ package dev.aatwi.fmtservices.controller;
 
 import dev.aatwi.fmtservices.dto.UserDTO;
 import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.services.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +29,7 @@ public class LoginController {
     @GetMapping("/{email}/{password}")
     public ResponseEntity<UserDTO> login(@PathVariable("email") String email, @PathVariable("password") String password) {
         User loggedInUser = loginService.login(email, password);
-        if (loggedInUser.isNull()) {
-            return new ResponseEntity<>(convertUserToUserDTO(UserBuilder.newNullUser()), HttpStatus.NOT_FOUND);
-
-        } else {
-            return new ResponseEntity<>(convertUserToUserDTO(loggedInUser), HttpStatus.OK);
-        }
+        HttpStatus responseStatus = loggedInUser.isNull() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        return new ResponseEntity<>(convertUserToUserDTO(loggedInUser), responseStatus);
     }
 }
