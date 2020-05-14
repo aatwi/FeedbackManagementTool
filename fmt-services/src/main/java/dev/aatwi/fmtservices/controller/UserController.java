@@ -30,7 +30,6 @@ public class UserController {
     }
 
     @PostMapping(value = "/create/")
-    @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         try {
             User createdUser = userService.saveUser(convertUserDTOtoUser(userDTO));

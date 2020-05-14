@@ -17,15 +17,16 @@ public class User {
     @Column(name = "USER_ID", unique = true)
     private Long userId;
 
-    @Column(name = "EMAIL", unique = true)
+    @NotNull(message = "Email can not be null")
+    @Column(nullable = false, name = "EMAIL", unique = true)
     private String email;
 
     @Column(nullable = false)
-    @NotNull(message = "User name can not be null!")
+    @NotNull(message = "User name can not be null")
     private String name;
 
     @Column(nullable = false)
-    @NotNull(message = "User password can not be null!")
+    @NotNull(message = "Password can not be null")
     private String password;
 
     public User() {

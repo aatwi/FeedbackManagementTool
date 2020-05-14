@@ -3,15 +3,16 @@ package dev.aatwi.fmtservices.repository;
 import com.google.common.collect.Lists;
 import dev.aatwi.fmtservices.FmtServicesApplication;
 import dev.aatwi.fmtservices.model.User;
+import dev.aatwi.fmtservices.model.UserBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.TransactionSystemException;
 
 import static dev.aatwi.fmtservices.model.UserBuilder.newUserBuilder;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = FmtServicesApplication.class)
 public class UserRepositoryTest {
@@ -56,6 +57,41 @@ public class UserRepositoryTest {
     public void
     it_should_return_all_the_users_when_getAllUsers_is_called() {
         assertEquals(Lists.newArrayList(USER_A, USER_B), userRepository.findAll());
+    }
+
+    @Test
+    public void
+    it_should_throw_an_exception_when_saving_a_user_with_null_name() {
+        assertTransactionSystemExceptionThrown(newUserBuilder()
+                        .withEmail("email@email.com")
+                        .withPassword("Password"),
+                "User name can not be null");
+    }
+
+    @Test
+    public void
+    it_should_throw_an_exception_when_saving_a_user_with_null_email() {
+        assertTransactionSystemExceptionThrown(newUserBuilder()
+                        .withName("Name")
+                        .withPassword("Password"),
+                "Email can not be null");
+    }
+
+    @Test
+    public void
+    it_should_throw_an_exception_when_saving_a_user_with_null_password() {
+        assertTransactionSystemExceptionThrown(newUserBuilder()
+                        .withName("Name")
+                        .withEmail("email@email.com"),
+                "Password can not be null");
+    }
+
+    private void assertTransactionSystemExceptionThrown(UserBuilder user, String message) {
+        TransactionSystemException transactionSystemException = assertThrows(TransactionSystemException.class,
+                () -> userRepository.save(user.build()),
+                "Exception not thrown");
+
+        assertTrue(transactionSystemException.getRootCause().getMessage().contains(message));
     }
 
     @BeforeEach
