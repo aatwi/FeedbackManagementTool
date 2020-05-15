@@ -6,9 +6,9 @@ import java.sql.Date;
 import java.util.Calendar;
 
 import static dev.aatwi.fmtservices.dto.SessionDTOBuilder.newSessionDTOBuilder;
+import static dev.aatwi.fmtservices.mapper.SessionMapper.convertSessionDTOToSession;
+import static dev.aatwi.fmtservices.mapper.SessionMapper.convertSessionToSessionDTO;
 import static dev.aatwi.fmtservices.model.SessionBuilder.newSessionBuilder;
-import static dev.aatwi.fmtservices.user.management.mapper.SessionMapper.convertSessionDTOToSession;
-import static dev.aatwi.fmtservices.user.management.mapper.SessionMapper.convertSessionToSessionDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SessionMapperTest {
