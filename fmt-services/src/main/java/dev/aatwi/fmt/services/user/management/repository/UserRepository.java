@@ -1,4 +1,4 @@
-package dev.aatwi.fmt.services.repository;
+package dev.aatwi.fmt.services.user.management.repository;
 
 import dev.aatwi.fmt.services.user.management.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

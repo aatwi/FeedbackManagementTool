@@ -1,4 +1,4 @@
-package dev.aatwi.fmt.services.repository;
+package dev.aatwi.fmt.services.user.management.repository;
 
 import com.google.common.collect.Lists;
 import dev.aatwi.fmt.services.FmtServicesApplication;
