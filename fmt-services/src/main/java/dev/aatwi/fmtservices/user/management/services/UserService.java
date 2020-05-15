@@ -1,6 +1,6 @@
-package dev.aatwi.fmtservices.services;
+package dev.aatwi.fmtservices.user.management.services;
 
-import dev.aatwi.fmtservices.model.User;
+import dev.aatwi.fmtservices.user.management.entities.User;
 
 import java.util.List;
 

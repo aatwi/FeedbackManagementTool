@@ -1,9 +1,9 @@
-package dev.aatwi.fmtservices.mapper;
+package dev.aatwi.fmtservices.user.management.mappers;
 
-import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.model.User;
+import dev.aatwi.fmtservices.user.management.dto.UserDTO;
+import dev.aatwi.fmtservices.user.management.entities.User;
 
-import static dev.aatwi.fmtservices.dto.UserDTOBuilder.newUserDTOBuilder;
+import static dev.aatwi.fmtservices.user.management.dto.UserDTOBuilder.newUserDTOBuilder;
 
 public final class UserMapper {
     private UserMapper() {

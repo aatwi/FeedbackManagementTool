@@ -1,4 +1,4 @@
-package dev.aatwi.fmtservices.model;
+package dev.aatwi.fmtservices.user.management.entities;
 
 import com.google.common.base.Strings;
 

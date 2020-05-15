@@ -2,8 +2,8 @@ package dev.aatwi.fmtservices.repository;
 
 import com.google.common.collect.Lists;
 import dev.aatwi.fmtservices.FmtServicesApplication;
-import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.model.UserBuilder;
+import dev.aatwi.fmtservices.user.management.entities.User;
+import dev.aatwi.fmtservices.user.management.entities.UserBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.TransactionSystemException;
 
-import static dev.aatwi.fmtservices.model.UserBuilder.newUserBuilder;
+import static dev.aatwi.fmtservices.user.management.entities.UserBuilder.newUserBuilder;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = FmtServicesApplication.class)

@@ -1,7 +1,7 @@
-package dev.aatwi.fmtservices.services;
+package dev.aatwi.fmtservices.user.management.services;
 
-import dev.aatwi.fmtservices.model.User;
 import dev.aatwi.fmtservices.repository.UserRepository;
+import dev.aatwi.fmtservices.user.management.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

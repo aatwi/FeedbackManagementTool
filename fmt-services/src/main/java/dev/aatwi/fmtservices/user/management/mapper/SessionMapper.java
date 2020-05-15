@@ -1,4 +1,4 @@
-package dev.aatwi.fmtservices.mapper;
+package dev.aatwi.fmtservices.user.management.mapper;
 
 import dev.aatwi.fmtservices.dto.SessionDTO;
 import dev.aatwi.fmtservices.model.Session;

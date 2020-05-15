@@ -1,6 +1,6 @@
 package dev.aatwi.fmtservices.repository;
 
-import dev.aatwi.fmtservices.model.User;
+import dev.aatwi.fmtservices.user.management.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

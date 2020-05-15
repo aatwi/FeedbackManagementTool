@@ -1,9 +1,9 @@
-package dev.aatwi.fmtservices.services;
+package dev.aatwi.fmtservices.user.management.services;
 
 import dev.aatwi.fmtservices.FmtServicesApplication;
-import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.model.UserBuilder;
 import dev.aatwi.fmtservices.repository.UserRepository;
+import dev.aatwi.fmtservices.user.management.entities.User;
+import dev.aatwi.fmtservices.user.management.entities.UserBuilder;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

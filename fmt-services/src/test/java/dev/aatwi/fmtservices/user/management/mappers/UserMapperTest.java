@@ -1,11 +1,11 @@
-package dev.aatwi.fmtservices.mapper;
+package dev.aatwi.fmtservices.user.management.mappers;
 
 import org.junit.jupiter.api.Test;
 
-import static dev.aatwi.fmtservices.dto.UserDTOBuilder.newUserDTOBuilder;
-import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserDTOtoUser;
-import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserToUserDTO;
-import static dev.aatwi.fmtservices.model.UserBuilder.newUserBuilder;
+import static dev.aatwi.fmtservices.user.management.dto.UserDTOBuilder.newUserDTOBuilder;
+import static dev.aatwi.fmtservices.user.management.entities.UserBuilder.newUserBuilder;
+import static dev.aatwi.fmtservices.user.management.mappers.UserMapper.convertUserDTOtoUser;
+import static dev.aatwi.fmtservices.user.management.mappers.UserMapper.convertUserToUserDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserMapperTest {

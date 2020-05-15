@@ -1,15 +1,15 @@
-package dev.aatwi.fmtservices.controller;
+package dev.aatwi.fmtservices.user.management.controllers;
 
-import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.model.UserBuilder;
-import dev.aatwi.fmtservices.services.LoginService;
+import dev.aatwi.fmtservices.user.management.entities.User;
+import dev.aatwi.fmtservices.user.management.entities.UserBuilder;
+import dev.aatwi.fmtservices.user.management.services.LoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static dev.aatwi.fmtservices.model.UserBuilder.newNullUser;
+import static dev.aatwi.fmtservices.user.management.entities.UserBuilder.newNullUser;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;

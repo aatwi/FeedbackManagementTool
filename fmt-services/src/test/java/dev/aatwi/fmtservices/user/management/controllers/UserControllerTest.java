@@ -1,9 +1,9 @@
-package dev.aatwi.fmtservices.controller;
+package dev.aatwi.fmtservices.user.management.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.services.UserService;
+import dev.aatwi.fmtservices.user.management.dto.UserDTO;
+import dev.aatwi.fmtservices.user.management.entities.User;
+import dev.aatwi.fmtservices.user.management.services.UserService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.client.RestClientResponseException;
 
-import static dev.aatwi.fmtservices.dto.UserDTOBuilder.newUserDTOBuilder;
-import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserDTOtoUser;
+import static dev.aatwi.fmtservices.user.management.dto.UserDTOBuilder.newUserDTOBuilder;
+import static dev.aatwi.fmtservices.user.management.mappers.UserMapper.convertUserDTOtoUser;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;

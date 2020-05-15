@@ -1,8 +1,8 @@
-package dev.aatwi.fmtservices.controller;
+package dev.aatwi.fmtservices.user.management.controllers;
 
-import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.services.UserService;
+import dev.aatwi.fmtservices.user.management.dto.UserDTO;
+import dev.aatwi.fmtservices.user.management.entities.User;
+import dev.aatwi.fmtservices.user.management.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +11,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserDTOtoUser;
-import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserToUserDTO;
+import static dev.aatwi.fmtservices.user.management.mappers.UserMapper.convertUserDTOtoUser;
+import static dev.aatwi.fmtservices.user.management.mappers.UserMapper.convertUserToUserDTO;
 import static org.springframework.http.HttpStatus.CONFLICT;
 
 @RestController

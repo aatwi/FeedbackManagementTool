@@ -1,4 +1,4 @@
-package dev.aatwi.fmtservices.dto;
+package dev.aatwi.fmtservices.user.management.dto;
 
 import java.util.Objects;
 

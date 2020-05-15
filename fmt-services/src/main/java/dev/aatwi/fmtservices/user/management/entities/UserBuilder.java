@@ -1,4 +1,4 @@
-package dev.aatwi.fmtservices.model;
+package dev.aatwi.fmtservices.user.management.entities;
 
 public final class UserBuilder {
     String email;

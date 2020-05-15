@@ -1,8 +1,8 @@
-package dev.aatwi.fmtservices.controller;
+package dev.aatwi.fmtservices.user.management.controllers;
 
-import dev.aatwi.fmtservices.dto.UserDTO;
-import dev.aatwi.fmtservices.model.User;
-import dev.aatwi.fmtservices.services.LoginService;
+import dev.aatwi.fmtservices.user.management.dto.UserDTO;
+import dev.aatwi.fmtservices.user.management.entities.User;
+import dev.aatwi.fmtservices.user.management.services.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static dev.aatwi.fmtservices.mapper.UserMapper.convertUserToUserDTO;
+import static dev.aatwi.fmtservices.user.management.mappers.UserMapper.convertUserToUserDTO;
 
 @RestController
 @RequestMapping("api/login")
