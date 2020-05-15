@@ -1,6 +1,6 @@
 package features;
 
-import dev.aatwi.fmtservices.FmtServicesApplication;
+import dev.aatwi.fmt.services.FmtServicesApplication;
 import io.cucumber.java.Before;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
