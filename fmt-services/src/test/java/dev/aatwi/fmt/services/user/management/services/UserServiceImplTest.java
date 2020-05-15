@@ -1,8 +1,8 @@
 package dev.aatwi.fmt.services.user.management.services;
 
 import dev.aatwi.fmt.services.FmtServicesApplication;
-import dev.aatwi.fmt.services.user.management.entities.User;
-import dev.aatwi.fmt.services.user.management.entities.UserBuilder;
+import dev.aatwi.fmt.services.user.management.models.User;
+import dev.aatwi.fmt.services.user.management.models.UserBuilder;
 import dev.aatwi.fmt.services.user.management.repository.UserRepository;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package dev.aatwi.fmt.services.user.management.controllers;
 
 import dev.aatwi.fmt.services.user.management.dto.UserDTO;
-import dev.aatwi.fmt.services.user.management.entities.User;
+import dev.aatwi.fmt.services.user.management.models.User;
 import dev.aatwi.fmt.services.user.management.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

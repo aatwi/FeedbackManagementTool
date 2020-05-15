@@ -1,6 +1,6 @@
 package dev.aatwi.fmt.services.user.management.mappers;
 
-import dev.aatwi.fmt.services.user.management.entities.UserBuilder;
+import dev.aatwi.fmt.services.user.management.models.UserBuilder;
 import org.junit.jupiter.api.Test;
 
 import static dev.aatwi.fmt.services.user.management.dto.UserDTOBuilder.newUserDTOBuilder;

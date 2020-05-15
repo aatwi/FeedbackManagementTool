@@ -1,7 +1,7 @@
 package dev.aatwi.fmt.services.user.management.mappers;
 
 import dev.aatwi.fmt.services.user.management.dto.UserDTO;
-import dev.aatwi.fmt.services.user.management.entities.User;
+import dev.aatwi.fmt.services.user.management.models.User;
 
 import static dev.aatwi.fmt.services.user.management.dto.UserDTOBuilder.newUserDTOBuilder;
 
