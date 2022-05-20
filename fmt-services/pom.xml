@@ -19,7 +19,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.version>3.3</maven.compiler.version>
         <version.google.guava>28.0-jre</version.google.guava>
-        <version.google.gson>2.8.5</version.google.gson>
+        <version.google.gson>2.8.9</version.google.gson>
         <version.mockito>3.1.0</version.mockito>
         <version.junit>5.5.2</version.junit>
         <version.cucumber>5.2.0</version.cucumber>
